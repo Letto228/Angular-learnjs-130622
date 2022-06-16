@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 	title = 'Angular-learnjs-130622';
+	titleSecret = 'Angular-learnjs-130622-Secret';
 }
