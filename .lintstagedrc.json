@@ -1,4 +1,5 @@
 {
 	"*.{ts,js}": ["npm run prettier:fix", "git add"],
+	"*.less": ["npm run prettier:fix", "git add"],
 	"*.json": ["npm run prettier:fix", "git add"]
 }
