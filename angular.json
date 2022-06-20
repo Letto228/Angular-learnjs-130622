@@ -103,9 +103,21 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "Angular-learnjs-130622"
+  "defaultProject": "Angular-learnjs-130622",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
