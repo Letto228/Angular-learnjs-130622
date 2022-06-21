@@ -19,7 +19,7 @@ export class AppComponent {
 	constructor() {
 		this.currentImagePath = this._imagePaths[this._currentIndex];
 
-		setInterval(() => {
+		/*setInterval(() => {
 			this._currentIndex++;
 
 			if (this._currentIndex >= this._imagePaths.length) {
@@ -27,6 +27,6 @@ export class AppComponent {
 			}
 
 			this.currentImagePath = this._imagePaths[this._currentIndex];
-		}, 2000);
+		}, 2000);*/
 	}
 }
