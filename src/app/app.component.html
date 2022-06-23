@@ -1,2 +1,6 @@
-<app-header></app-header>
-<app-sidenav></app-sidenav>
+<app-header [title]="title" (menuClick)="sidenav.toggleDrawer()"></app-header>
+<!-- <app-sidenav
+    [isSidenavOpen]="isSidenavOpen"
+    (isSidenavOpenChange)="isSidenavOpen = $event"
+></app-sidenav> -->
+<app-sidenav #sidenav></app-sidenav>
