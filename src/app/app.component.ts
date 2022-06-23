@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
 	styleUrls: ['./app.component.less'],
 })
 export class AppComponent {
-	title = 'Angular-learnjs-130622';
+	readonly title = 'Angular-learnjs-130622';
 }
