@@ -18,13 +18,11 @@ export class AppComponent implements OnInit {
 		'https://www.planetware.com/wpimages/2020/03/world-most-visited-cities-new-york-city.jpg',
 	];
 
-	constructor() {}
-
 	ngOnInit(): void {
-		this.setInterval();
+		this.changePhoto();
 	}
 
-	setInterval() {
+	changePhoto() {
 		setInterval(() => {
 			for (let i = 0; i <= this.imageObj.length; i++) {
 				this.imgSrc += this.imageObj[i];
