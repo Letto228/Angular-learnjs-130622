@@ -14,13 +14,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 	templateUrl: './sidenav.component.html',
 	styleUrls: ['./sidenav.component.less'],
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent {
 	showFiller = false;
 	productName = 'Apple';
 	emailFormControl = new FormControl(this.productName, [Validators.required, Validators.email]);
 
 	matcher = new MyErrorStateMatcher();
 	constructor() {}
-
-	ngOnInit(): void {}
 }

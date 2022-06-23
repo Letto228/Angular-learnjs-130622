@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 	constructor() {}
 
 	ngOnInit(): void {
-		// this.setInterval();
+		this.setInterval();
 	}
 
 	setInterval() {
