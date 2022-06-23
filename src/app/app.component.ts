@@ -9,6 +9,25 @@ export class AppComponent {
 	title = 'Angular-learnjs-130622';
 	titleSecret = 'Angular-learnjs-130622-Secret';
 
-	imgSrc =
-		'https://get.wallhere.com/photo/landscape-sea-reflection-bridge-suspension-bridge-1680x1050-px-nonbuilding-structure-cable-stayed-bridge-truss-bridge-706446.jpg';
+	color = 'red';
+	imgSrc = '../assets/img/1.jpg';
+  imgBgSrc = this.imgSrc;
+
+	images = [this.imgBgSrc,
+    '../assets/img/2.jpg',
+    '../assets/img/3.jpg',
+    '../assets/img/4.jpg',
+  ];
+
+  constructor() {
+    let counter = 0;
+    setInterval(()=>{
+      if(counter > this.images.length - 1) {
+        counter = 0;
+      }
+      this.imgBgSrc = this.images[counter];
+      counter++;
+    },1000)
+  }
+
 }
