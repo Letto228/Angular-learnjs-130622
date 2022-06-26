@@ -14,4 +14,12 @@ export class SidenavComponent {
 
 	matcher = new MyErrorStateMatcher();
 	constructor() {}
+
+	get getValidationEmailRequired() {
+		return this.emailFormControl.hasError('email') && !this.emailFormControl.hasError('required');
+	}
+
+	get getRequired() {
+		return this.emailFormControl.hasError('required');
+	}
 }
