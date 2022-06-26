@@ -1,0 +1,54 @@
+.goods-card {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 30px;
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 40px auto;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,.2);
+  .header {
+    width: 100%;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0px 0px 20px 0px;
+  }
+  .image {
+    display: flex;
+    width: 400px;
+    align-items: center;
+    justify-content: space-between;
+    .prev,.next {
+      width: 40px;
+      height: 40px;
+      background: url('../../../assets/caret-right-bold-svgrepo-com.svg') no-repeat center;
+      background-size: cover;
+      flex-shrink: 0;
+      &.prev {
+        transform: rotate(180deg);
+      }
+    }
+    img {
+      max-width: calc(100% - 80px);
+    }
+  }
+  .common {
+    width: calc(100% - 440px);
+    padding: 20px 0px;
+  }
+
+  button {
+    width: 300px;
+    height: 48px;
+    border: none;
+    color: #fff;
+    background: green;
+    border-radius: 5px;
+    font-size: 18px;
+    margin-top: 30px;
+    cursor: pointer;
+    &:hover {
+      background-color: darken(green, 5%);;
+    }
+  }
+}

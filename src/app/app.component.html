@@ -3,4 +3,6 @@
     [isSidenavOpen]="isSidenavOpen"
     (isSidenavOpenChange)="isSidenavOpen = $event"
 ></app-sidenav> -->
+<app-goods-card (click)="onCardClick()" (buyButtonClick)="onBuyButtonClick($event)"></app-goods-card>
 <app-sidenav #sidenav></app-sidenav>
+

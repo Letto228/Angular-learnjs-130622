@@ -13,4 +13,12 @@ export class AppComponent {
 	// onMenuClick() {
 	// 	this.sidenav.toggleDrawer();
 	// }
+
+  onCardClick(){
+    alert('Клик по карточке товара');
+  }
+
+  onBuyButtonClick(event: Event) {
+    alert('Клик по кнопке покупки');
+  }
 }
