@@ -10,6 +10,10 @@ export class AppComponent {
 
 	readonly title = 'Angular-learnjs';
 
+	log(event: Event) {
+		console.log(event);
+	}
+
 	// onMenuClick() {
 	// 	this.sidenav.toggleDrawer();
 	// }
