@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
 	selector: 'app-sidenav',
@@ -6,7 +7,35 @@ import { Component } from '@angular/core';
 	styleUrls: ['./sidenav.component.less'],
 })
 export class SidenavComponent {
-	readonly inputInitValue = 'productName';
+	@ViewChild(MatDrawer, { static: false }) private drawerComponent!: MatDrawer;
 
-	showFiller = false;
+	// constructor() {}
+
+	// ngOnChanges({}: SimpleChanges) {
+	// 	// if (isDrawerOpen) {
+	// 	// 	this.isDrawerOpen === isDrawerOpen.currentValue;
+	// 	// }
+	// }
+
+	// ngOnInit() {
+	// 	console.log(this.drawerComponent);
+	// }
+
+	// ngDoCheck() {}
+
+	// ngAfterContentInit() {}
+
+	// ngAfterContentChecked() {}
+
+	// ngAfterViewInit() {
+	// 	console.log(this.drawerComponent);
+	// }
+
+	// ngAfterViewChecked() {}
+
+	// ngOnDestroy() {}
+
+	toggleDrawer() {
+		this.drawerComponent.toggle();
+	}
 }

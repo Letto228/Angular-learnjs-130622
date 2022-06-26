@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
 	styleUrls: ['./app.component.less'],
 })
 export class AppComponent {
-	readonly title = 'Angular-learnjs-130622';
+	// @ViewChild('sidenav') sidenav!: SidenavComponent;
+
+	readonly title = 'Angular-learnjs';
+
+	// onMenuClick() {
+	// 	this.sidenav.toggleDrawer();
+	// }
 }
