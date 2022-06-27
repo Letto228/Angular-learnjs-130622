@@ -9,7 +9,7 @@ import { IProduct } from './shared/interfaces/product.interface';
 })
 export class AppComponent implements OnInit {
 	// @ViewChild('sidenav') sidenav!: SidenavComponent;
-	products: IProduct[] = productsMock;
+	product = productsMock[0];
 
 	readonly title = 'Angular-learnjs';
 
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
 	constructor() {}
 
 	ngOnInit(): void {
-		console.log(this.products, 'app component');
+		console.log(this.product, 'app component');
 	}
 
 	onOrderClick(event: Event) {
