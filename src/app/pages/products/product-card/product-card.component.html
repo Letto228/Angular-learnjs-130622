@@ -1,0 +1,27 @@
+<mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>{{product?.name}}</mat-card-title>
+      <mat-card-subtitle>{{product?.price}} Р</mat-card-subtitle>
+    </mat-card-header>
+    <!-- <mat-card-content>
+        <p class="description">
+            description description description description description
+        </p>
+    </mat-card-content> -->
+    <div class="galerey">
+        <button mat-icon-button>
+            <mat-icon>
+                chevron_left
+            </mat-icon>
+        </button>
+        <img mat-card-image [src]="product.images[0].url" alt="Product photo">
+        <button mat-icon-button>
+            <mat-icon>
+                chevron_right
+            </mat-icon>
+        </button>
+    </div>
+    <mat-card-actions class="mat-card-actions-align-end">
+      <button mat-button (click)="onProductBuy($event)">BUY</button>
+    </mat-card-actions>
+  </mat-card>
