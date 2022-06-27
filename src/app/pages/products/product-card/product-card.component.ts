@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IProduct } from 'src/app/shared/interfaces/product.interface';
 
 @Component({
@@ -8,4 +8,12 @@ import { IProduct } from 'src/app/shared/interfaces/product.interface';
 })
 export class ProductCardComponent {
 	@Input() product!: IProduct;
+
+	@Output() buyProduct = new EventEmitter<void>();
+
+	onProductBuy(event: Event) {
+		event.stopPropagation();
+
+		this.buyProduct.emit();
+	}
 }
