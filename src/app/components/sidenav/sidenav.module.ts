@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SidenavComponent } from './sidenav.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
-import { ProductsModule } from 'src/app/pages/products/products.module';
+import { ProductsModule } from '../../pages/products-list/products.module';
 
 @NgModule({
 	declarations: [SidenavComponent],
