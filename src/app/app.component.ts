@@ -10,14 +10,13 @@ export class AppComponent {
 	titleSecret = 'Angular-learnjs-130622-Secret';
 
 	color = 'red';
-	imgSrc = '../assets/img/1.jpg';
-  imgBgSrc = this.imgSrc;
-
-	images = [this.imgBgSrc,
+  images = [
+    '../assets/img/1.jpg',
     '../assets/img/2.jpg',
     '../assets/img/3.jpg',
     '../assets/img/4.jpg',
   ];
+  imgBgSrc = this.images[0];
 
   constructor() {
     let counter = 0;
