@@ -3,6 +3,14 @@
     [isSidenavOpen]="isSidenavOpen"
     (isSidenavOpenChange)="isSidenavOpen = $event"
 ></app-sidenav> -->
-<app-goods-card (click)="onCardClick()" (buyButtonClick)="onBuyButtonClick($event)"></app-goods-card>
+
+<div class="goods-list">
+  <app-goods-card class="app-goods-card" (click)="onCardClick($event)" (buyButtonClick)="onBuyButtonClick($event)" [product]="productData[0]"></app-goods-card>
+  <app-goods-card class="app-goods-card" (click)="onCardClick($event)" (buyButtonClick)="onBuyButtonClick($event)" [product]="productData[1]"></app-goods-card>
+  <app-goods-card class="app-goods-card" (click)="onCardClick($event)" (buyButtonClick)="onBuyButtonClick($event)" [product]="productData[2]"></app-goods-card>
+  <app-goods-card class="app-goods-card" (click)="onCardClick($event)" (buyButtonClick)="onBuyButtonClick($event)" [product]="productData[3]"></app-goods-card>
+</div>
+
+
 <app-sidenav #sidenav></app-sidenav>
 

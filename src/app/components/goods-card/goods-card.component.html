@@ -1,12 +1,22 @@
-<div class="goods-card">
-  <div class="header">{{ header }}</div>
-  <div class="image">
-    <a href="#" class="prev"></a>
-      <img [src]="images[0].url" />
-    <a href="#" class="next"></a>
+<mat-card class="example-card">
+  <div>
+    <mat-card-header>
+      <mat-card-title>{{ product.name }}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image class="example-card-image" src="{{ product.images[0].url }}" alt="{{ product.name }}">
+    <mat-card-content>
+      <p>
+        {{ prepareDescription(product.description) }}
+      </p>
+    </mat-card-content>
   </div>
-  <div class="common">
-    <p class="description">{{ description }}</p>
-    <button class="button" (click)="buyButtonClick.emit($event); $event.stopPropagation();">Купить</button>
-  </div>
-</div>
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="onBuyButtonClick($event)"
+    >
+      Купить
+    </button>
+  </mat-card-actions>
+</mat-card>

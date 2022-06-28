@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {productsMock} from "./mocks/products.mock";
 
 @Component({
 	selector: 'app-root',
@@ -9,16 +10,27 @@ export class AppComponent {
 	// @ViewChild('sidenav') sidenav!: SidenavComponent;
 
 	readonly title = 'Angular-learnjs';
-
+  productData = productsMock;
 	// onMenuClick() {
 	// 	this.sidenav.toggleDrawer();
 	// }
 
-  onCardClick(){
-    alert('Клик по карточке товара');
+  light(elem: HTMLElement) {
+    elem.classList.add('backlight');
+    setTimeout(()=>{
+      elem.classList.remove('backlight');
+    },1000);
   }
 
-  onBuyButtonClick(event: Event) {
-    alert('Клик по кнопке покупки');
+  onCardClick(event:Event){
+    let elem = (event.currentTarget as HTMLElement).children[0] as HTMLElement;
+    this.light(elem);
+    console.log('Клик по карточке товара');
+  }
+
+  onBuyButtonClick(event:Event) {
+    let elem = (event.currentTarget as HTMLElement);
+    this.light(elem);
+    console.log('Клик по кнопке покупки');
   }
 }

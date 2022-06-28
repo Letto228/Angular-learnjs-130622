@@ -8,4 +8,5 @@ export interface IProduct {
 	subCategory: string;
 	feedbacksCount: number;
 	rating: number;
+	description: string;
 }
