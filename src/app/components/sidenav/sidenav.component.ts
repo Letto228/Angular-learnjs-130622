@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
 	selector: 'app-sidenav',
@@ -8,6 +9,7 @@ import { MatDrawer } from '@angular/material/sidenav';
 })
 export class SidenavComponent {
 	@ViewChild(MatDrawer, { static: false }) private drawerComponent!: MatDrawer;
+	value: string;
 
 	// constructor() {}
 
@@ -37,5 +39,9 @@ export class SidenavComponent {
 
 	toggleDrawer() {
 		this.drawerComponent.toggle();
+	}
+
+	onChange(event: Event) {
+		console.log(event);
 	}
 }

@@ -1,22 +1,32 @@
-<mat-drawer-container class="example-container" autosize>
+<section class="sidenav">
+  <mat-drawer-container class="sidenav__wrap" autosize>
     <mat-drawer
-        #drawer
-        class="example-sidenav"
-        mode="side"
+      #drawer
+      class="example-sidenav"
+      mode="side"
     >
-        <p>Auto-resizing sidenav</p>
-        <p>Lorem, ipsum dolor sit amet consectetur.</p>
-        <button mat-raised-button>
-            Toggle extra text
-        </button>
+      <p>Auto-resizing sidenav</p>
+      <p>Lorem, ipsum dolor sit amet consectetur.</p>
+      <button mat-raised-button>
+        Toggle extra text
+      </button>
     </mat-drawer>
 
-    <div class="example-sidenav-content">
-        <input #input type="text">
-<!--        <button #button type="button" mat-button (click)="drawer.toggle()">-->
-<!--            Toggle sidenav-->
-<!--        </button>-->
+    <div class="sidenav__content">
+      <!--        <button #button type="button" mat-button (click)="drawer.toggle()">-->
+      <!--            Toggle sidenav-->
+      <!--        </button>-->
+
+      <mat-form-field class="sidenav__form" >
+        <mat-label>Search</mat-label>
+        <input class="sidenav__input" matInput type="text" [(ngModel)]="value" (ngModelChange)="onChange($event)">
+        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
       <app-products></app-products>
 
     </div>
-</mat-drawer-container>
+  </mat-drawer-container>
+</section>
