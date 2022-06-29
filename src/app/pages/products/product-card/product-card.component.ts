@@ -21,6 +21,7 @@ export class ProductCardComponent implements OnInit, OnChanges {
 	}
 
 	onOrder(event: Event): void {
+		event.stopPropagation();
 		console.log('Buy');
 		this.orderClick.emit(event);
 	}
