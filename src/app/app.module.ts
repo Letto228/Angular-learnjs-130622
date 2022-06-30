@@ -6,6 +6,7 @@ import { HeaderModule } from './components/header/header.module';
 import { SidenavModule } from './components/sidenav/sidenav.module';
 import { ProductsModule } from './pages/products-list/products.module';
 import { MatListModule } from '@angular/material/list';
+import { PopupHostModule } from './components/popup-host/popup-host.module';
 
 @NgModule({
 	declarations: [AppComponent], // let/const: Component, Directive, Pipe
@@ -16,6 +17,7 @@ import { MatListModule } from '@angular/material/list';
 		SidenavModule,
 		BrowserAnimationsModule,
 		ProductsModule,
+		PopupHostModule,
 		MatListModule,
 	],
 	// exports: [AppComponent],
