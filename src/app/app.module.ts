@@ -9,18 +9,16 @@ import { MatListModule } from '@angular/material/list';
 import { PopupHostModule } from './components/popup-host/popup-host.module';
 
 @NgModule({
-	declarations: [AppComponent], // let/const: Component, Directive, Pipe
+	declarations: [AppComponent],
 	imports: [
 		BrowserModule,
 		HeaderModule,
-		// AppRoutingModule,
 		SidenavModule,
 		BrowserAnimationsModule,
 		ProductsModule,
 		PopupHostModule,
 		MatListModule,
 	],
-	// exports: [AppComponent],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}

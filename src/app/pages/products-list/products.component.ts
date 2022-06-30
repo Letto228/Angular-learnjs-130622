@@ -9,10 +9,4 @@ import { ProductCardComponent } from './product-card/product-card.component';
 })
 export class ProductsComponent {
 	products = productsMock;
-
-	onCardClick(event: Event) {
-		console.log(event.currentTarget);
-		(event.currentTarget as HTMLElement).style.backgroundColor = 'red';
-		// alert('Клик по карточке товара');
-	}
 }

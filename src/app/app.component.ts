@@ -1,5 +1,4 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'app-root',
@@ -7,12 +6,5 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 	styleUrls: ['./app.component.less'],
 })
 export class AppComponent {
-	@ViewChild('sidenav', { static: true }) sidenav!: SidenavComponent;
-	@ViewChild('list', { static: true }) listTemplate!: TemplateRef<unknown>;
-
 	readonly title = 'Angular-learnjs';
-
-	onMenuClick() {
-		this.sidenav.toggleDrawer();
-	}
 }
