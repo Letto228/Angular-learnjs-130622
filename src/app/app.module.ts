@@ -7,9 +7,10 @@ import { SidenavModule } from './components/sidenav/sidenav.module';
 import { ProductsModule } from './pages/products-list/products.module';
 import { MatListModule } from '@angular/material/list';
 import { PopupHostModule } from './components/popup-host/popup-host.module';
+import { HostPopupComponent } from './components/host-popup/host-popup.component';
 
 @NgModule({
-	declarations: [AppComponent], // let/const: Component, Directive, Pipe
+	declarations: [AppComponent, HostPopupComponent], // let/const: Component, Directive, Pipe
 	imports: [
 		BrowserModule,
 		HeaderModule,
