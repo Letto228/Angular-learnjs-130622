@@ -8,8 +8,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 
-export const sideNavImports = [ProductsModule];
-
 @NgModule({
 	declarations: [SidenavComponent],
 	imports: [
@@ -19,7 +17,7 @@ export const sideNavImports = [ProductsModule];
 		MatIconModule,
 		FormsModule,
 		MatButtonModule,
-		...sideNavImports,
+		ProductsModule,
 	],
 	exports: [SidenavComponent],
 })

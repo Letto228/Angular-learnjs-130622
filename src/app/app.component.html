@@ -3,4 +3,4 @@
     [isSidenavOpen]="isSidenavOpen"
     (isSidenavOpenChange)="isSidenavOpen = $event"
 ></app-sidenav> -->
-<app-sidenav #sidenav></app-sidenav>
+<app-sidenav #sidenav (inputChange)="onInputChange($event)"></app-sidenav>

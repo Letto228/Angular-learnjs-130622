@@ -6,23 +6,12 @@ import { IProduct } from '../../../shared/interfaces/product.interface';
 	templateUrl: './product-card.component.html',
 	styleUrls: ['./product-card.component.less'],
 })
-export class ProductCardComponent implements OnInit, OnChanges {
+export class ProductCardComponent {
 	@Input() products: IProduct;
 	@Output() orderClick = new EventEmitter<Event>();
 
-	constructor() {}
-
-	ngOnInit(): void {
-		console.log(this.products, 'product card comp');
-	}
-
-	ngOnChanges(changes: SimpleChanges) {
-		this.products = changes['products'].currentValue;
-	}
-
 	onOrder(event: Event): void {
 		event.stopPropagation();
-		console.log('Buy');
 		this.orderClick.emit(event);
 	}
 }

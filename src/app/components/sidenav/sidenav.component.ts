@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { FormControl, Validators } from '@angular/forms';
 
@@ -9,39 +9,15 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class SidenavComponent {
 	@ViewChild(MatDrawer, { static: false }) private drawerComponent!: MatDrawer;
-	value: string;
 
-	// constructor() {}
-
-	// ngOnChanges({}: SimpleChanges) {
-	// 	// if (isDrawerOpen) {
-	// 	// 	this.isDrawerOpen === isDrawerOpen.currentValue;
-	// 	// }
-	// }
-
-	// ngOnInit() {
-	// 	console.log(this.drawerComponent);
-	// }
-
-	// ngDoCheck() {}
-
-	// ngAfterContentInit() {}
-
-	// ngAfterContentChecked() {}
-
-	// ngAfterViewInit() {
-	// 	console.log(this.drawerComponent);
-	// }
-
-	// ngAfterViewChecked() {}
-
-	// ngOnDestroy() {}
+	@Output() inputChange = new EventEmitter<Event>();
+	value: string = '';
 
 	toggleDrawer() {
 		this.drawerComponent.toggle();
 	}
 
 	onChange(event: Event) {
-		console.log(event);
+		this.inputChange.emit(event);
 	}
 }

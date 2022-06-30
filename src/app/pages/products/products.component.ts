@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { productsMock } from '../../mocks/products.mock';
 
 @Component({
@@ -6,14 +6,8 @@ import { productsMock } from '../../mocks/products.mock';
 	templateUrl: './products.component.html',
 	styleUrls: ['./products.component.less'],
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
 	product = productsMock[0];
-
-	constructor() {}
-
-	ngOnInit(): void {
-		console.log(this.product, 'app component');
-	}
 
 	onOrderClick(event: Event) {
 		console.log(event, 'Order completed');

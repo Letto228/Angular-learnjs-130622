@@ -15,7 +15,7 @@
     <div class="sidenav__content">
       <mat-form-field class="sidenav__form" >
         <mat-label>Search</mat-label>
-        <input class="sidenav__input" matInput type="text" [(ngModel)]="value" (ngModelChange)="onChange($event)">
+        <input class="sidenav__input" matInput type="text" [value]="value" (focusout)="onChange($event)">
         <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
           <mat-icon>close</mat-icon>
         </button>

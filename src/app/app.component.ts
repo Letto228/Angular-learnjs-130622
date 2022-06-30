@@ -17,13 +17,11 @@ export class AppComponent implements OnInit {
 	// 	this.sidenav.toggleDrawer();
 	// }
 
-	constructor() {}
-
 	ngOnInit(): void {
 		console.log(this.product, 'app component');
 	}
 
-	onOrderClick(event: Event) {
-		console.log(event, 'Order completed');
+	onInputChange(event: Event) {
+		console.log(event);
 	}
 }
