@@ -10,7 +10,6 @@ import { IProduct } from './shared/interfaces/product.interface';
 export class AppComponent implements OnInit {
 	// @ViewChild('sidenav') sidenav!: SidenavComponent;
 	product = productsMock[0];
-
 	readonly title = 'Angular-learnjs';
 
 	// onMenuClick() {
@@ -22,6 +21,6 @@ export class AppComponent implements OnInit {
 	}
 
 	onInputChange(event: Event) {
-		console.log(event);
+		console.log(event, 'event');
 	}
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { FormControl, Validators } from '@angular/forms';
 
@@ -9,8 +9,9 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class SidenavComponent {
 	@ViewChild(MatDrawer, { static: false }) private drawerComponent!: MatDrawer;
+	@Input() inputValue: string;
 
-	@Output() inputChange = new EventEmitter<Event>();
+	@Output() inputChange = new EventEmitter<string>();
 	value: string = '';
 
 	toggleDrawer() {
@@ -18,6 +19,6 @@ export class SidenavComponent {
 	}
 
 	onChange(event: Event) {
-		this.inputChange.emit(event);
+		console.log(event);
 	}
 }
