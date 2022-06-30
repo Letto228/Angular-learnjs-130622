@@ -4,18 +4,11 @@
         class="example-sidenav"
         mode="side"
     >
-        <p>Auto-resizing sidenav</p>
-        <p>Lorem, ipsum dolor sit amet consectetur.</p>
-        <button mat-raised-button>
-            Toggle extra text
-        </button>
+        <ng-container #drawerViewPort id="div"></ng-container>
+        <!-- <ng-content select="mat-list"></ng-content> -->
     </mat-drawer>
   
     <div class="example-sidenav-content">
-        <input #input type="text">
-        <app-products></app-products>
-        <button #button type="button" mat-button (click)="drawer.toggle()">
-            Toggle sidenav
-        </button>
+        <ng-content></ng-content>
     </div>
 </mat-drawer-container>

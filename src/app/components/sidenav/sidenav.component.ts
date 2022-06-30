@@ -1,4 +1,17 @@
-import { Component, ViewChild } from '@angular/core';
+import {
+	AfterViewInit,
+	Component,
+	ContentChild,
+	ContentChildren,
+	ElementRef,
+	Input,
+	OnInit,
+	QueryList,
+	TemplateRef,
+	ViewChild,
+	ViewContainerRef,
+} from '@angular/core';
+import { MatListItem } from '@angular/material/list';
 import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
@@ -6,36 +19,33 @@ import { MatDrawer } from '@angular/material/sidenav';
 	templateUrl: './sidenav.component.html',
 	styleUrls: ['./sidenav.component.less'],
 })
-export class SidenavComponent {
-	@ViewChild(MatDrawer, { static: false }) private drawerComponent!: MatDrawer;
+export class SidenavComponent implements OnInit, AfterViewInit {
+	// @Input() listTemplate!: TemplateRef<unknown>;
 
-	// constructor() {}
+	@ViewChild(MatDrawer, { static: true }) private drawerComponent!: MatDrawer;
+	@ViewChild('drawerViewPort', { static: true, read: ViewContainerRef })
+	private drawerViewPortElement!: ViewContainerRef;
 
-	// ngOnChanges({}: SimpleChanges) {
-	// 	// if (isDrawerOpen) {
-	// 	// 	this.isDrawerOpen === isDrawerOpen.currentValue;
-	// 	// }
-	// }
+	@ContentChild('list', { static: true }) private listTemplate!: TemplateRef<unknown>;
 
-	// ngOnInit() {
-	// 	console.log(this.drawerComponent);
-	// }
+	@ContentChildren('listItem', { descendants: true, read: ElementRef }) private listItem:
+		| QueryList<MatListItem>
+		| undefined;
 
-	// ngDoCheck() {}
+	ngOnInit() {
+		this.insertList(this.listTemplate);
+	}
 
-	// ngAfterContentInit() {}
-
-	// ngAfterContentChecked() {}
-
-	// ngAfterViewInit() {
-	// 	console.log(this.drawerComponent);
-	// }
-
-	// ngAfterViewChecked() {}
-
-	// ngOnDestroy() {}
+	ngAfterViewInit() {
+		console.log(this.listItem);
+	}
 
 	toggleDrawer() {
 		this.drawerComponent.toggle();
+	}
+
+	private insertList(template: TemplateRef<unknown>) {
+		this.drawerViewPortElement.clear();
+		this.drawerViewPortElement.createEmbeddedView(template);
 	}
 }

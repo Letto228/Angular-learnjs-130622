@@ -4,6 +4,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderModule } from './components/header/header.module';
 import { SidenavModule } from './components/sidenav/sidenav.module';
+import { ProductsModule } from './pages/products-list/products.module';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
 	declarations: [AppComponent], // let/const: Component, Directive, Pipe
@@ -13,6 +15,8 @@ import { SidenavModule } from './components/sidenav/sidenav.module';
 		// AppRoutingModule,
 		SidenavModule,
 		BrowserAnimationsModule,
+		ProductsModule,
+		MatListModule,
 	],
 	// exports: [AppComponent],
 	bootstrap: [AppComponent],
