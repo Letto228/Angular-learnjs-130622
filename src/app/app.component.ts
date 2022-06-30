@@ -15,7 +15,7 @@ export class AppComponent {
 	// 	this.sidenav.toggleDrawer();
 	// }
 
-  light(elem: HTMLElement) {
+  private light(elem: HTMLElement) {
     elem.classList.add('backlight');
     setTimeout(()=>{
       elem.classList.remove('backlight');
@@ -23,13 +23,13 @@ export class AppComponent {
   }
 
   onCardClick(event:Event){
-    let elem = (event.currentTarget as HTMLElement).children[0] as HTMLElement;
+    const elem = (event.currentTarget as HTMLElement).children[0] as HTMLElement;
     this.light(elem);
     console.log('Клик по карточке товара');
   }
 
   onBuyButtonClick(event:Event) {
-    let elem = (event.currentTarget as HTMLElement);
+    const elem = (event.currentTarget as HTMLElement);
     this.light(elem);
     console.log('Клик по кнопке покупки');
   }

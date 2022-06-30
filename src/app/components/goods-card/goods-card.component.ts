@@ -12,7 +12,7 @@ import { IProduct } from 'src/app/shared/interfaces/product.interface';
 export class GoodsCardComponent {
   @Output() buyButtonClick = new EventEmitter<Event>();
   @Input() product!: IProduct;
-  descriptionLength = 300;
+  readonly descriptionLength = 300;
 
   prepareDescription(description: string){
     if (description.length > this.descriptionLength) {
