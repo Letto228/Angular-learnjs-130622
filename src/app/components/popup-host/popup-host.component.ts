@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 
 @Component({
 	selector: 'app-popup-host',
@@ -6,7 +6,19 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./popup-host.component.less'],
 })
 export class PopupHostComponent implements OnInit {
+	@Input() hostTemplate: TemplateRef<unknown>;
+
+	@ViewChild('viewPopupHost', { static: true, read: ViewContainerRef }) private popupHostElement: ViewContainerRef;
+
 	constructor() {}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this.insertTemplate(this.hostTemplate);
+		console.log(this.hostTemplate);
+	}
+
+	private insertTemplate(template: TemplateRef<unknown>) {
+		this.popupHostElement.clear();
+		this.popupHostElement.createEmbeddedView(template);
+	}
 }

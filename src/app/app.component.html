@@ -3,4 +3,13 @@
     [isSidenavOpen]="isSidenavOpen"
     (isSidenavOpenChange)="isSidenavOpen = $event"
 ></app-sidenav> -->
-<app-sidenav #sidenav></app-sidenav>
+
+<app-sidenav #sidenav>
+</app-sidenav>
+<app-popup-host [hostTemplate]="hostTemplateView">
+  <ng-template #hostTemplateView>
+    <p>hello here is popup template background</p>
+  </ng-template>
+</app-popup-host>
+
+

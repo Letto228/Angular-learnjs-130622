@@ -5,5 +5,6 @@ import { PopupHostComponent } from './popup-host.component';
 @NgModule({
 	declarations: [PopupHostComponent],
 	imports: [CommonModule],
+	exports: [PopupHostComponent],
 })
 export class PopupHostModule {}
