@@ -1,6 +1,13 @@
-:host {
+:host,
+.container {
 	display: flex;
 	flex-direction: column;
+	overflow: auto;
+	height: 100%;
+}
+
+.container {
+	padding: 10px 0;
 }
 
 .product:not(:nth-child(1)) {

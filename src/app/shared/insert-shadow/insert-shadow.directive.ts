@@ -16,9 +16,9 @@ export class InsertShadowDirective {
 
 	@HostListener('isShadowActive', ['$event'])
 	onShadow(isShadowActive: boolean) {
-		console.log('isShadowActive work');
+		// console.log('isShadowActive work');
 		this.boxShadow = !isShadowActive ? '' : 'inset 0 0 10px #000';
-		console.log(this.boxShadow, isShadowActive);
+		// console.log(this.boxShadow, isShadowActive);
 	}
 
 	// [prop]="value"
