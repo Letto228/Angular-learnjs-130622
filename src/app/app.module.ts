@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderModule } from './components/header/header.module';
 import { SidenavModule } from './components/sidenav/sidenav.module';
 import { PopupHostModule } from './components/popup-host/popup-host.module';
-import { MatListModule } from '@angular/material/list';
 
 @NgModule({
 	declarations: [AppComponent], // let/const: Component, Directive, Pipe
@@ -16,7 +15,6 @@ import { MatListModule } from '@angular/material/list';
 		SidenavModule,
 		BrowserAnimationsModule,
 		PopupHostModule,
-		MatListModule,
 	],
 	// exports: [AppComponent],
 	bootstrap: [AppComponent],
