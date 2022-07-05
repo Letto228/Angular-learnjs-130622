@@ -26,6 +26,19 @@ export class ProductsComponent {
 			this.changeDetectorRef.markForCheck();
 		}, 3000);
 	}
+
+	onLoadScrollData(direction: string) {
+	  console.log(direction);
+    this.isLoadingData = true;
+    setTimeout(() => {
+      this.isLoadingData = false;
+
+      this.changeDetectorRef.markForCheck();
+    }, 3000);
+  }
+
+
+
 	// isHovered = true;
 
 	// constructor(
