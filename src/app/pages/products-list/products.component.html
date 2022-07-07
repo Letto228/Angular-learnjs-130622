@@ -1,31 +1,43 @@
 <div *ngIf="products; else spiner" class="container">
-    <!-- <ng-container *appCarousel="let content of ...; ..."> -->
-        <!-- <ng-template [ngIf]="products" [ngIfElse]="spiner"> -->
-                <!-- <ng-template ngFor let-product let-index="index" [ngForOf]="products" [ngForTrackBy]="trackBy">
-                    <app-product-card class="product" [product]="products[index]"></app-product-card>
-                </ng-template> -->
-                <!-- ngFor let-product [ngForOf]="products" [ngForTrackBy]="trackBy" -->
-                <app-product-card
-                    *ngFor="let product of products; trackBy: trackBy; let index = index"
-                    class="product"
-                    [product]="products[index]"
-                ></app-product-card>
-        <!-- </ng-template> -->
+    <ng-container *appCarousel="
+        let content of products;
+        elementsSize: 2;
+        let allIndexes = allIndexes;
+        let activeIndex = index;
+        let next = next;
+        let back = back;
+        let selectIndex = selectIndex
+    ">
+        <div class="card-container">
+            <app-product-card
+                *ngFor="let product of content; trackBy: trackBy; let index = index"
+                class="product"
+                [product]="product"
+            ></app-product-card>
+        </div>
     
-        <!-- <div> -->
-            <!-- <button mat-icon-button (click)="back()">
+        <div class="pagination-container">
+            <button mat-icon-button (click)="back()">
                 <mat-icon>
                     chevron_left
                 </mat-icon>
-            </button> -->
-            <!-- Номера страниц -->
-            <!-- <button mat-icon-button (click)="next()">
+            </button>
+            <button
+                mat-icon-button
+                *ngFor="let index of allIndexes"
+                class="pagination__page-number"
+                [class.pagination__page-number_active]="activeIndex === index"
+                (click)="selectIndex(index)"
+            >
+                {{index}}
+            </button>
+            <button mat-icon-button (click)="next()">
                 <mat-icon>
                     chevron_right
                 </mat-icon>
-            </button> -->
-        <!-- </div> -->
-    <!-- </ng-container> -->
+            </button>
+        </div>
+    </ng-container>
 </div>
 
 <ng-template #spiner>
