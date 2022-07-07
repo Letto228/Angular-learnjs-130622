@@ -1,7 +1,13 @@
-<div *ngIf="products; else spiner" class="container">
+<mat-form-field class="example-form-field" appearance="fill">
+    <mat-label>Search</mat-label>
+    <input #input matInput type="text">
+</mat-form-field>
+
+<div *ngIf="(products$ | async) as products; else spiner" class="container">
+<!-- <div *ngIf="(products$ | async) | serachFilter as products; else spiner" class="container"> -->
     <ng-container *appCarousel="
         let content of products;
-        elementsSize: 2;
+        elementsSize: 6;
         let allIndexes = allIndexes;
         let activeIndex = index;
         let next = next;
@@ -9,6 +15,8 @@
         let selectIndex = selectIndex
     ">
         <div class="card-container">
+            <!-- {{(products$ | async) | json}} -->
+            <!-- {{json.translate(async.translate(products$)}} -->
             <app-product-card
                 *ngFor="let product of content; trackBy: trackBy; let index = index"
                 class="product"

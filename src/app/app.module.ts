@@ -8,6 +8,9 @@ import { ProductsModule } from './pages/products-list/products.module';
 import { MatListModule } from '@angular/material/list';
 import { PopupHostModule } from './components/popup-host/popup-host.module';
 import { InsertShadowModule } from './shared/insert-shadow/insert-shadow.module';
+import { ProductsStoreService } from './shared/products/products-store.service';
+import { HttpClientModule } from '@angular/common/http';
+import { ProductsApiService } from './shared/products/products-api.service';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -20,7 +23,9 @@ import { InsertShadowModule } from './shared/insert-shadow/insert-shadow.module'
 		PopupHostModule,
 		MatListModule,
 		InsertShadowModule,
+		HttpClientModule,
 	],
+	providers: [ProductsStoreService, ProductsApiService],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}

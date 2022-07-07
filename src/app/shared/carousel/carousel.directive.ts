@@ -15,7 +15,7 @@ interface ICarouselDirective<T> {
 })
 export class CarouselDirective<T> implements OnInit, OnChanges {
 	@Input() appCarouselElementsSize = 1;
-	@Input() appCarouselOf: T[] | undefined;
+	@Input() appCarouselOf: T[] | undefined | null;
 
 	private readonly items$ = new BehaviorSubject<Array<T[]> | T[] | undefined>(undefined);
 	private readonly currentIndex$ = new BehaviorSubject<number>(0);

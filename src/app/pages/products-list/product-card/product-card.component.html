@@ -1,15 +1,8 @@
 <mat-card class="card">
     <mat-card-header>
       <mat-card-title>{{product?.name}}</mat-card-title>
-      <mat-card-subtitle>{{product?.price}} Р</mat-card-subtitle>
+      <mat-card-subtitle>{{product?.price | currency : 'EUR' : 'symbol-narrow' : '1.0-0'}}</mat-card-subtitle>
     </mat-card-header>
-    <!-- <ng-template
-        appCarousel
-        let-img
-        [appCarouselOf]="product?.images"
-        (emitBack)="onRegistrBack($event)"
-        (emitNext)="next = $event"
-    > -->
     <div *appCarousel="let img of product?.images; let next = next; let back = back" class="galerey">
         <button mat-icon-button (click)="back()">
             <mat-icon>
@@ -23,8 +16,9 @@
             </mat-icon>
         </button>
     </div>
-    <!-- </ng-template> -->
     <mat-card-actions class="mat-card-actions-align-end">
       <button mat-button (click)="onProductBuy($event)">BUY</button>
     </mat-card-actions>
-  </mat-card>
+</mat-card>
+<!-- {{product | json}} -->
+<!-- {{getJsonProduct(product)}} -->
