@@ -1,51 +1,73 @@
-import { Directive, EventEmitter, Input, OnInit, Output, TemplateRef, ViewContainerRef } from '@angular/core';
-import { BehaviorSubject, combineLatest, filter, map, withLatestFrom } from 'rxjs';
+import {
+	ChangeDetectorRef,
+	Directive,
+	Input,
+	OnChanges,
+	OnInit,
+	SimpleChanges,
+	TemplateRef,
+	ViewContainerRef,
+} from '@angular/core';
+import { BehaviorSubject, filter, map, withLatestFrom } from 'rxjs';
 
 interface ICarouselDirective<T> {
-	$implicit: T;
+	$implicit: T | T[];
 	index: number;
 	next: () => void;
 	back: () => void;
+	selectIndex: (index: number) => void;
+	allIndexes: number[];
 }
 
 @Directive({
 	selector: '[appCarousel]',
 })
-export class CarouselDirective<T> implements OnInit {
-	@Input() set appCarouselOf(items: T[] | undefined) {
-		if (!items?.length) {
-			this.viewContainerRef.clear();
+export class CarouselDirective<T> implements OnInit, OnChanges {
+	@Input() appCarouselElementsSize = 1;
+	@Input() appCarouselOf: T[] | undefined;
 
-			return;
-		}
-
-		this.items$.next(items);
-		this.currentIndex$.next(0);
-	}
-
-	// @Output() emitNext = new EventEmitter<() => void>();
-	// @Output() emitBack = new EventEmitter<() => void>();
-
-	private readonly items$ = new BehaviorSubject<T[] | undefined>(undefined);
+	private readonly items$ = new BehaviorSubject<Array<T[]> | T[] | undefined>(undefined);
 	private readonly currentIndex$ = new BehaviorSubject<number>(0);
 
 	constructor(private templateRef: TemplateRef<ICarouselDirective<T>>, private viewContainerRef: ViewContainerRef) {}
 
+	ngOnChanges({ appCarouselOf, appCarouselElementsSize }: SimpleChanges): void {
+		if (appCarouselOf || appCarouselElementsSize) {
+			if (!this.appCarouselOf?.length) {
+				this.viewContainerRef.clear();
+
+				return;
+			}
+
+			this.items$.next(this.getGroupedItems(this.appCarouselOf));
+			this.currentIndex$.next(0);
+		}
+	}
+
 	ngOnInit() {
 		this.listenCurrentIndexChange();
-		// this.emitBack.emit(this.back.bind(this));
-		// this.emitNext.emit(() => {
-		//   this.next();
-		// });
+	}
+
+	private getGroupedItems(items: T[]): Array<T[]> | T[] {
+		return this.appCarouselElementsSize <= 1
+			? items
+			: items.reduce(
+					(groupedItems: Array<T[]>, item: T) => {
+						const groupedItemsLastIndex = groupedItems.length - 1;
+
+						if (groupedItems[groupedItemsLastIndex].length < this.appCarouselElementsSize) {
+							groupedItems[groupedItemsLastIndex].push(item);
+
+							return groupedItems;
+						}
+
+						return [...groupedItems, [item]];
+					},
+					[[]]
+			  );
 	}
 
 	private listenCurrentIndexChange() {
-		// combineLatest([
-		//   this.currentIndex$,
-		//   this.items$.pipe(filter(Boolean))
-		// ]).pipe(
-		//   map(([index, items]) => this.getCurrentContext(index, items)),
-		// )
 		this.currentIndex$
 			.pipe(
 				withLatestFrom(this.items$.pipe(filter(Boolean))),
@@ -57,14 +79,20 @@ export class CarouselDirective<T> implements OnInit {
 			});
 	}
 
-	private getCurrentContext(index: number, items: T[]): ICarouselDirective<T> {
+	private getCurrentContext(index: number, items: Array<T[]> | T[]): ICarouselDirective<T> {
 		return {
 			index,
 			$implicit: items[index],
+			allIndexes: items.map((_, index) => index),
 			next: () => {
 				this.next();
 			},
-			back: this.back.bind(this),
+			back: () => {
+				this.back();
+			},
+			selectIndex: (index: number) => {
+				this.selectIndex(index);
+			},
 		};
 	}
 
@@ -88,5 +116,9 @@ export class CarouselDirective<T> implements OnInit {
 		}
 
 		this.currentIndex$.next(prevIndex >= 0 ? prevIndex : itemsLen - 1);
+	}
+
+	private selectIndex(index: number) {
+		this.currentIndex$.next(index);
 	}
 }

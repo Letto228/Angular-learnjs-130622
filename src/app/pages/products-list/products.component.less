@@ -10,10 +10,32 @@
 	padding: 10px 0;
 }
 
-.product:not(:nth-child(1)) {
-	margin-top: 10px;
+.product {
+	margin: 10px;
 }
 
 .spiner {
 	margin: 0 auto;
+}
+
+.pagination-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.pagination {
+	&__page-number {
+		cursor: pointer;
+
+		&_active {
+			color: rgb(0, 13, 255);
+		}
+	}
+}
+
+.card-container {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
 }
