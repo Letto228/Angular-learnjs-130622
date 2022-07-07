@@ -1,13 +1,4 @@
-import {
-	ChangeDetectorRef,
-	Directive,
-	Input,
-	OnChanges,
-	OnInit,
-	SimpleChanges,
-	TemplateRef,
-	ViewContainerRef,
-} from '@angular/core';
+import { Directive, Input, OnChanges, OnInit, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
 import { BehaviorSubject, filter, map, withLatestFrom } from 'rxjs';
 
 interface ICarouselDirective<T> {

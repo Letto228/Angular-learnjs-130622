@@ -3,8 +3,6 @@ import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 interface IContextAppFor<T> {
 	$implicit: T;
 }
-// IContextAppFor<IProduct> => $implicit: Product
-// IContextAppFor<string> => $implicit: string
 
 @Directive({
 	selector: '[appFor]',

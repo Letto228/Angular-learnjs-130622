@@ -1,6 +1,6 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { LoadDirection } from './enums';
-import { isScrollReachedBottom, isScrollReachedTop } from './utils';
+import { isScrollReachedBottom } from './utils';
 
 @Directive({
 	selector: '[appScrollWithLoading]',
@@ -24,13 +24,7 @@ export class ScrollWithLoadingDirective {
 			return;
 		}
 
-		// const shouldLoadMessagesUp = isScrollReachedTop(this.scrollTop, prevScrollTop);
 		const shouldLoadMessagesDown = isScrollReachedBottom(this.scrollTop, this.lowerScrollPosition, prevScrollTop);
-
-		// if (shouldLoadMessagesUp) {
-		//   this.loadData.emit(LoadDirection.Before);
-		//   return;
-		// }
 
 		if (shouldLoadMessagesDown) {
 			this.loadData.emit(LoadDirection.After);

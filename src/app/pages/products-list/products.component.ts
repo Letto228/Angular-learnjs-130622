@@ -25,18 +25,9 @@ export class ProductsComponent implements OnInit {
 			this.products = productsMock.map((item) => ({ ...item }));
 			this.changeDetectorRef.markForCheck();
 		}, 5000);
-		setTimeout(() => {
-			console.log(' ');
-		}, 6000);
-		setTimeout(() => {
-			// this.products = productsMock.map(item => ({...item, name: item.name + '123'}));
-			this.changeDetectorRef.markForCheck();
-		}, 7000);
 	}
 
 	trackBy(_: number, item: IProduct) {
 		return item._id;
-		// return item.name;
-		// return item;
 	}
 }
