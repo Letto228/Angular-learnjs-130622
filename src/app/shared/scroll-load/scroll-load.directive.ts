@@ -2,7 +2,7 @@ import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from
 import { Direction } from './direction.enum';
 
 @Directive({
-	selector: '[scrollLoad]',
+	selector: '[appScrollLoad]',
 })
 export class ScrollLoadDirective {
 	@Input() isLoadingData: boolean = false;

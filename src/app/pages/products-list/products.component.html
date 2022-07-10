@@ -1,5 +1,5 @@
 <!-- <button [appNgClass]="{hover: isHovered}" [ngStyle]="{color: '#fff'}">Button</button> -->
-<div class="product-wrap" scrollLoad (scrollLoadEvent)="onScrollLoad($event)" [isLoadingData]="isLoadingData">
+<div class="product-wrap" appScrollLoad (scrollLoadEvent)="onScrollLoad($event)" [isLoadingData]="isLoadingData">
   <app-product-card class="product" [product]="products[0]"></app-product-card>
   <app-product-card class="product" [product]="products[1]"></app-product-card>
   <app-product-card class="product" [product]="products[2]"></app-product-card>
