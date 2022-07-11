@@ -3,8 +3,8 @@
     <input #input matInput type="text">
 </mat-form-field>
 
-<div *ngIf="(products$ | async) as products; else spiner" class="container">
-<!-- <div *ngIf="(products$ | async) | serachFilter as products; else spiner" class="container"> -->
+<!-- <div *ngIf="(products$ | async) as products; else spiner" class="container"> -->
+<div *ngIf="(products$ | async) | serachFilter : input.value as products; else spiner" class="container">
     <ng-container *appCarousel="
         let content of products;
         elementsSize: 6;
