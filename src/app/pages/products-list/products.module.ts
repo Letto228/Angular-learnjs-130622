@@ -25,6 +25,12 @@ import { SerachFilterModule } from '../../shared/serach-filter/serach-filter.mod
 		MatInputModule,
 		SerachFilterModule,
 	],
+	// providers: [
+	// 	{
+	// 		provide: 'ProductsStoreService',
+	// 		useValue: {},
+	// 	},
+	// ],
 	exports: [ProductsComponent],
 })
 export class ProductsModule {}

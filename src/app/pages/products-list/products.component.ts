@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { map, Observable, Subject, Subscription, takeUntil, timer } from 'rxjs';
+import { environment } from '../../../environments/environment';
 import { IProduct } from '../../shared/products/product.interface';
 import { ProductsApiService } from '../../shared/products/products-api.service';
 import { ProductsStoreService } from '../../shared/products/products-store.service';
@@ -27,9 +28,19 @@ export class ProductsComponent implements OnInit {
 	// products: IProduct[] | undefined = undefined;
 	readonly products$ = this.productsStoreService.products$;
 
-	constructor(private productsStoreService: ProductsStoreService) {}
+	constructor(
+		private readonly productsStoreService: ProductsStoreService
+	) // private readonly productsStoreServiceStr: 'ProductsStoreService',
+	// @Inject(ProductsStoreService) private readonly productsStoreService: ProductsStoreService,
+	// @Inject('ProductsStoreService') private readonly productsStoreServiceStr: ProductsStoreService,
+	{}
 
 	ngOnInit() {
+		// console.log(
+		// 	this.productsStoreService,
+		// 	this.productsStoreServiceStr,
+		// 	this.productsStoreService === this.productsStoreServiceStr,
+		// )
 		this.productsStoreService.loadProducts();
 	}
 
