@@ -5,26 +5,51 @@
                     <app-product-card class="product" [product]="products[index]"></app-product-card>
                 </ng-template> -->
                 <!-- ngFor let-product [ngForOf]="products" [ngForTrackBy]="trackBy" -->
-                <app-product-card
-                    *ngFor="let product of products; trackBy: trackBy; let index = index"
-                    class="product"
-                    [product]="products[index]"
-                ></app-product-card>
+
+                  <ng-container
+                    *appCar="
+                        let parts of products;
+                        partsCount: 2;
+                        let back=back;
+                        let next=next;
+                        let pages=pages
+                    "
+                  >
+                    <app-product-card
+                        *ngFor="let product of parts; trackBy: trackBy; let index = index"
+                        class="product"
+                        [product]="product"
+                    ></app-product-card>
+                    <div class="pages">
+                      <ng-container *ngIf="pages">
+                        <button mat-icon-button (click)="back()">
+                          <mat-icon>
+                            chevron_left
+                          </mat-icon>
+                        </button>
+
+                        <ng-container *ngFor="let page of pages">
+                          <a *ngIf="!page.active; else num"
+                            href="#"
+                            [ngClass]="{active: page.active}"
+                          >{{ page.num }}</a>
+                          <ng-template #num>
+                            <span>{{ page.num }}</span>
+                          </ng-template>
+                        </ng-container>
+
+                        <button mat-icon-button (click)="next()">
+                          <mat-icon>
+                            chevron_right
+                          </mat-icon>
+                        </button>
+                      </ng-container>
+                    </div>
+                  </ng-container>
+
         <!-- </ng-template> -->
-    
-        <!-- <div> -->
-            <!-- <button mat-icon-button (click)="back()">
-                <mat-icon>
-                    chevron_left
-                </mat-icon>
-            </button> -->
-            <!-- Номера страниц -->
-            <!-- <button mat-icon-button (click)="next()">
-                <mat-icon>
-                    chevron_right
-                </mat-icon>
-            </button> -->
-        <!-- </div> -->
+
+
     <!-- </ng-container> -->
 </div>
 

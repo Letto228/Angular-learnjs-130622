@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ForModule } from '../../shared/for/for.module';
 import { CarouselModule } from '../../shared/carousel/carousel.module';
+import { CarModule } from '../../shared/car/car.module';
 
 @NgModule({
 	declarations: [ProductsComponent, ProductCardComponent],
@@ -19,6 +20,7 @@ import { CarouselModule } from '../../shared/carousel/carousel.module';
 		MatProgressSpinnerModule,
 		ForModule,
 		CarouselModule,
+		CarModule,
 	],
 	exports: [ProductsComponent],
 })
