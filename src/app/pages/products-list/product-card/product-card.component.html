@@ -10,7 +10,8 @@
         (emitBack)="onRegistrBack($event)"
         (emitNext)="next = $event"
     > -->
-    <div *appCarousel="let img of product?.images; let next = next; let back = back" class="galerey">
+
+    <div *appCar="let img of product?.images; let back=back; let next=next" class="galerey">
         <button mat-icon-button (click)="back()">
             <mat-icon>
                 chevron_left

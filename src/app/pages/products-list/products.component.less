@@ -10,10 +10,42 @@
 	padding: 10px 0;
 }
 
-.product:not(:nth-child(1)) {
-	margin-top: 10px;
+.product {
+  height: 100%;
+  margin: 0px 10px;
+}
+
+.products {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .spiner {
 	margin: 0 auto;
+}
+
+.pages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  a {
+    color: black;
+  }
+  a,span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 7px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    line-height: normal;
+  }
+  span {
+    border: 1px solid;
+    background: rgba(0,0,0,.5);
+    color: #fff;
+  }
 }

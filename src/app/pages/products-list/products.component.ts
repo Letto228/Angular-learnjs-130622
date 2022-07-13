@@ -14,7 +14,9 @@ export class ProductsComponent implements OnInit {
 	constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
 	ngOnInit() {
-		setTimeout(() => {
+		this.products = productsMock;
+		//console.log(this.products)
+		/*setTimeout(() => {
 			this.products = productsMock.slice(0, 4);
 			this.changeDetectorRef.markForCheck();
 		}, 2000);
@@ -31,7 +33,7 @@ export class ProductsComponent implements OnInit {
 		setTimeout(() => {
 			// this.products = productsMock.map(item => ({...item, name: item.name + '123'}));
 			this.changeDetectorRef.markForCheck();
-		}, 7000);
+		}, 7000);*/
 	}
 
 	trackBy(_: number, item: IProduct) {
