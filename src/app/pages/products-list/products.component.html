@@ -12,17 +12,23 @@
                         partsCount: 2;
                         let back=back;
                         let next=next;
+                        let go=go;
                         let pages=pages
+                        let nextDisabled=nextDisabled
+                        let prevDisabled=prevDisabled
+                        let index=index
                     "
                   >
-                    <app-product-card
+                    <div class="products">
+                      <app-product-card
                         *ngFor="let product of parts; trackBy: trackBy; let index = index"
                         class="product"
                         [product]="product"
-                    ></app-product-card>
+                      ></app-product-card>
+                    </div>
                     <div class="pages">
                       <ng-container *ngIf="pages">
-                        <button mat-icon-button (click)="back()">
+                        <button *ngIf="index" mat-icon-button (click)="back()">
                           <mat-icon>
                             chevron_left
                           </mat-icon>
@@ -31,14 +37,14 @@
                         <ng-container *ngFor="let page of pages">
                           <a *ngIf="!page.active; else num"
                             href="#"
-                            [ngClass]="{active: page.active}"
+                             (click)="go(page.num)"
                           >{{ page.num }}</a>
                           <ng-template #num>
                             <span>{{ page.num }}</span>
                           </ng-template>
                         </ng-container>
 
-                        <button mat-icon-button (click)="next()">
+                        <button *ngIf="index!=pages.length - 1" mat-icon-button (click)="next()">
                           <mat-icon>
                             chevron_right
                           </mat-icon>

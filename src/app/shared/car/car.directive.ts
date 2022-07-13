@@ -5,6 +5,7 @@ interface ICarDirective<T> {
 	index: number;
 	back: () => void;
 	next: () => void;
+  go: (index:number) => void | undefined;
 	pages: IPage[];
 }
 
@@ -25,10 +26,6 @@ export class CarDirective<T> implements OnInit {
 	}
 
 	ngOnInit() {
-		/*if(this.appCarOf) {
-      this.items = this.appCarOf;
-    }*/
-
 		if (!this.items?.length) {
 			this.viewContainerRef.clear();
 			return;
@@ -49,15 +46,10 @@ export class CarDirective<T> implements OnInit {
 		this.insertTemplateWithCurrentIndex();
 	}
 
-	//private items: T[] | undefined = undefined;
-	//private partsCount: number | undefined = undefined;
 	private items: T[] | undefined;
 	private currentIndex: number = 0;
 	private itemsLength: number = 0;
 	private fullItems: T[] | undefined = undefined;
-	private nextDisable = false;
-	private prevDisable = true;
-	private pagesCount: number = 0;
 	private pages: IPage[] = [];
 	private insertTemplateWithCurrentIndex() {
 		if (this.fullItems && this.partsCount) {
@@ -74,8 +66,6 @@ export class CarDirective<T> implements OnInit {
 				return item;
 			});
 		}
-		console.log(this.pages);
-
 		this.viewContainerRef.createEmbeddedView(
 			this.templateRef,
 			this.getCurrentContext(this.currentIndex, this.items as T[], this.partsCount)
@@ -98,7 +88,10 @@ export class CarDirective<T> implements OnInit {
 			next: () => {
 				this.next();
 			},
-			pages: this.pages,
+      go: (index: number) => {
+        this.go(index);
+      },
+			pages: this.pages
 		};
 	}
 
@@ -107,22 +100,27 @@ export class CarDirective<T> implements OnInit {
 	private next() {
 		const nextIndex = this.currentIndex + 1;
 
-		if (!this.itemsLength) {
+		if (!this.itemsLength || nextIndex == this.pages.length) {
 			return;
 		}
 
-		this.currentIndex = nextIndex < this.itemsLength ? nextIndex : 0;
+		this.currentIndex = nextIndex;
 		this.insertTemplateWithCurrentIndex();
 	}
 
 	private back() {
 		const prevIndex = this.currentIndex - 1;
 
-		if (!this.itemsLength) {
+		if (!this.itemsLength || prevIndex == -1) {
 			return;
 		}
 
-		this.currentIndex = prevIndex >= 0 ? prevIndex : this.itemsLength - 1;
+		this.currentIndex = prevIndex;
 		this.insertTemplateWithCurrentIndex();
 	}
+
+	private go(index:number) {
+      this.currentIndex = index-1;
+      this.insertTemplateWithCurrentIndex();
+  }
 }
