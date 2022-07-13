@@ -27,17 +27,17 @@ export class ProductsComponent {
 		}, 3000);
 	}
 
-	onLoadScrollData(direction: string) {
-	  console.log(direction);
-    this.isLoadingData = true;
-    setTimeout(() => {
-      this.isLoadingData = false;
+	onLoadScrollData(direction: LoadDirection) {
+		console.log(direction);
 
-      this.changeDetectorRef.markForCheck();
-    }, 3000);
-  }
+		this.isLoadingData = true;
 
+		setTimeout(() => {
+			this.isLoadingData = false;
 
+			this.changeDetectorRef.markForCheck();
+		}, 3000);
+	}
 
 	// isHovered = true;
 

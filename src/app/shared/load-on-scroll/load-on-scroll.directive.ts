@@ -1,50 +1,68 @@
 import {
-  Directive,
-  ElementRef,
-  EventEmitter,
-  HostBinding,
-  HostListener,
-  Input,
-  OnInit,
-  Output,
-  ViewChild
+	Directive,
+	ElementRef,
+	EventEmitter,
+	HostBinding,
+	HostListener,
+	Input,
+	OnInit,
+	Output,
+	ViewChild,
 } from '@angular/core';
 
+import { LoadDirection } from '../scroll-with-loading/enums';
+
 @Directive({
-  selector: '[appLoadOnScroll]'
+	selector: '[appLoadOnScroll]',
 })
 export class LoadOnScrollDirective {
-  private scrollPos = 0;
-  readonly scrollOffset = 100;
+	private scrollPos = 0;
+	readonly scrollOffset = 100;
 
-  @Input() isLoadData!:boolean;
-  @Output() loadScrollData = new EventEmitter<string>();
+	@Input() isLoadData!: boolean;
+	@Output() loadScrollData = new EventEmitter<LoadDirection>();
 
-  private emitScroll(direction: string){
-      this.loadScrollData.emit(direction);
-  }
+	private emitScroll(direction: LoadDirection) {
+		this.loadScrollData.emit(direction);
+	}
 
-  @HostListener('scroll')
-  onScroll(){
-    if (this.isLoadData) {
-      return;
-    }
-    const st = this.nativeElement.scrollTop;
-    if(st > this.scrollPos) { //down
-      if((this.nativeElement.scrollHeight - st) < (this.nativeElement.clientHeight + this.scrollOffset)) {
-        this.emitScroll('after');
-      }
-    } else { // up
-      if(st < this.scrollOffset) {
-        this.emitScroll('before');
-      }
-    }
-    this.scrollPos = st;
-  }
+	@HostListener('scroll')
+	onScroll() {
+		const scrollTop = this.nativeElement.scrollTop;
+		const scrollDirection = this.getScrollDirection(scrollTop);
+		const reachedBorder = this.reachedBorder(scrollDirection, scrollTop);
+		if (reachedBorder) {
+			this.emitScroll(reachedBorder);
+		}
 
-  constructor(private elementRef: ElementRef) {}
+		this.scrollPos = scrollTop;
+	}
 
-  private get nativeElement(): HTMLElement {
-    return this.elementRef.nativeElement;
-  }
+	constructor(private elementRef: ElementRef) {}
+
+	private get nativeElement(): HTMLElement {
+		return this.elementRef.nativeElement;
+	}
+
+	private getScrollDirection(scrollTop: number): string {
+		return scrollTop > this.scrollPos ? LoadDirection.After : LoadDirection.Before;
+	}
+
+	private reachedBorder(direction: string, scrollTop: number): LoadDirection | false {
+		const scrolledHeight = this.nativeElement.scrollHeight - scrollTop;
+		const visibleHeight = this.nativeElement.clientHeight + this.scrollOffset;
+
+		if (this.isLoadData) {
+			return false;
+		}
+
+		if (
+			(direction == LoadDirection.After && scrolledHeight < visibleHeight) ||
+			(direction == LoadDirection.Before && scrollTop < this.scrollOffset)
+		) {
+			return direction;
+		}
+
+		return false;
+	}
 }
