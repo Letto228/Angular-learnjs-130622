@@ -112,6 +112,7 @@
 	},
 	"defaultProject": "Angular-learnjs-130622",
 	"cli": {
+		"analytics": false,
 		"defaultCollection": "@angular-eslint/schematics"
 	}
 }
