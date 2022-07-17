@@ -24,10 +24,9 @@ export class AppComponent {
   startChanging() {
     setInterval(() => {
       this.iterator = this.iterator === this.imgSrc.length - 1 ? 0 : this.iterator + 1;
-    }, 2000);
+    }, 5000);
   }
   getBackgroundImg() {
-    return 'url(' + this.imgSrc[this.iterator] + ')';
+    return `url(${this.imgSrc[this.iterator]})`;
   }
-
 }
