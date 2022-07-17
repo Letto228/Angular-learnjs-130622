@@ -26,5 +26,8 @@ export class AppComponent {
       this.iterator = this.iterator === this.imgSrc.length - 1 ? 0 : this.iterator + 1;
     }, 2000);
   }
+  getBackgroundImg() {
+    return 'url(' + this.imgSrc[this.iterator] + ')';
+  }
 
 }
