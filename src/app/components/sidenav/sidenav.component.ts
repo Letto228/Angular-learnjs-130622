@@ -4,6 +4,7 @@ import {
 	Component,
 	ContentChild,
 	EventEmitter,
+	Inject,
 	OnInit,
 	Output,
 	TemplateRef,
@@ -11,12 +12,21 @@ import {
 	ViewContainerRef,
 } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
+import { OBJECT_NAME } from '../../shared/object-name/object-name.token';
 
 @Component({
 	selector: 'app-sidenav',
 	templateUrl: './sidenav.component.html',
 	styleUrls: ['./sidenav.component.less'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	providers: [
+		{
+			provide: OBJECT_NAME,
+			useFactory: () => {
+				return 'SidenavComponent';
+			},
+		},
+	],
 })
 export class SidenavComponent implements OnInit {
 	@Output() isShadowActive = new EventEmitter<boolean>();
@@ -27,9 +37,14 @@ export class SidenavComponent implements OnInit {
 
 	@ContentChild('list', { static: true }) private listTemplate!: TemplateRef<unknown>;
 
-	constructor(private changeDetectorRef: ChangeDetectorRef) {}
+	constructor(
+		private changeDetectorRef: ChangeDetectorRef,
+		@Inject(OBJECT_NAME) private readonly objectName: string
+	) {}
 
 	ngOnInit() {
+		console.log(this.objectName);
+
 		this.insertList(this.listTemplate);
 
 		setTimeout(() => {

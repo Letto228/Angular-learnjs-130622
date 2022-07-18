@@ -18,6 +18,7 @@ import { environment } from '../environments/environment';
 import { BASE_URL } from './shared/base-url/base-url.token';
 import { baseUrl } from './shared/base-url/base-url.const';
 import { BaseUrlInterceptor } from './shared/base-url/base-url.interceptor';
+import { OBJECT_NAME } from './shared/object-name/object-name.token';
 
 // const productsApiServiceMock: ProductsApiService = {
 // 	getProducts$(): Observable<IProduct[]> {
@@ -39,65 +40,19 @@ import { BaseUrlInterceptor } from './shared/base-url/base-url.interceptor';
 		HttpClientModule,
 	],
 	providers: [
-		// ProductsStoreService,
-		// ProductsApiService,
 		{
-			provide: ProductsStoreService,
-			useClass: ProductsStoreService,
-			// useFactory: (productsApiService: ProductsApiService) => new ProductsStoreService(productsApiService),
-			// deps: [ProductsApiService],
+			provide: OBJECT_NAME,
+			useValue: 'AppModule',
 		},
-		// {
-		// 	provide: BASE_URL,
-		// 	useValue: '',
-		// },
-		// {
-		// provide: 'ProductsStoreService',
-		// provide: 'ProductsStoreService',
-		// useClass: ProductsStoreService,
-		// useExisting: ProductsStoreService,
-		// useFactory: (productsStoreService: ProductsStoreService) => productsStoreService,
-		// deps: [ProductsStoreService]
-		// },
-		// value 'ProductsStoreService' === value ProductsStoreService
-		// {
-		// 'ProductsStoreService': ...,
-		// ProductsStoreService: ...,
-		// }
 		{
 			provide: ProductsApiService,
 			useClass: ProductsApiService,
-			// useFactory: (httpClient: HttpClient) => new ProductsApiService(httpClient),
-			// deps: [HttpClient],
-			// useValue: productsApiServiceMock,
-			// useFactory: () => productsApiServiceMock,
-			// useFactory: () => environment.production
-			// 	? {
-			// 		getProducts$(): Observable<IProduct[]> {
-			// 			return of([]);
-			// 		}
-			// 	}
-			// 	: {
-			// 		getProducts$(): Observable<IProduct[]> {
-			// 			return of(productsMock);
-			// 		}
-			// 	}
 		},
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: BaseUrlInterceptor,
 			multi: true,
 		},
-		// {
-		// 	provide: HTTP_INTERCEPTORS,
-		// 	useClass: RootInterceptor,
-		// 	multi: true,
-		// },
-		// {
-		// 	provide: HTTP_INTERCEPTORS,
-		// 	useClass: CatchErrorInterceptor,
-		// 	multi: true,
-		// },
 	],
 	bootstrap: [AppComponent],
 })

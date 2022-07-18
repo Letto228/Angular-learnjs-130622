@@ -1,10 +1,7 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { map, Observable, Subject, Subscription, takeUntil, timer } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { ChangeDetectionStrategy, Component, Host, Inject, OnInit, Optional, Self, SkipSelf } from '@angular/core';
+import { OBJECT_NAME } from '../../shared/object-name/object-name.token';
 import { IProduct } from '../../shared/products/product.interface';
-import { ProductsApiService } from '../../shared/products/products-api.service';
 import { ProductsStoreService } from '../../shared/products/products-store.service';
-import { productsMock } from '../../shared/products/products.mock';
 
 // NullInjector
 
@@ -18,53 +15,54 @@ import { productsMock } from '../../shared/products/products.mock';
 
 // RootInjector (AppModuleInjector)
 
+// ^
+// |
+
+// AppElementInjector
+
+// ^
+// |
+
+// ...
+
+// ^
+// |
+
+// SidenavElementInjector
+
+// ^
+// |
+
+// ProductsElementInjector
+
 @Component({
 	selector: 'app-products',
 	templateUrl: './products.component.html',
 	styleUrls: ['./products.component.less'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	providers: [
+		{
+			provide: OBJECT_NAME,
+			useFactory: () => {
+				console.log('ProductsComponent INIT');
+				return 'ProductsComponent';
+			},
+		},
+	],
 })
 export class ProductsComponent implements OnInit {
-	// products: IProduct[] | undefined = undefined;
 	readonly products$ = this.productsStoreService.products$;
 
 	constructor(
-		private readonly productsStoreService: ProductsStoreService
-	) // private readonly productsStoreServiceStr: 'ProductsStoreService',
-	// @Inject(ProductsStoreService) private readonly productsStoreService: ProductsStoreService,
-	// @Inject('ProductsStoreService') private readonly productsStoreServiceStr: ProductsStoreService,
-	{}
+		private readonly productsStoreService: ProductsStoreService,
+		@Inject(OBJECT_NAME) @Optional() @Host() private readonly objectName: string,
+		@Inject(OBJECT_NAME) @SkipSelf() private readonly parentObjectName: string
+	) {}
 
 	ngOnInit() {
-		// console.log(
-		// 	this.productsStoreService,
-		// 	this.productsStoreServiceStr,
-		// 	this.productsStoreService === this.productsStoreServiceStr,
-		// )
+		console.log(this.objectName, this.parentObjectName);
 		this.productsStoreService.loadProducts();
 	}
-
-	// private readonly subsription: Subscription = new Subscription();
-	// private readonly destroy$ = new Subject<void>();
-
-	// constructor(private changeDetectorRef: ChangeDetectorRef) {}
-
-	// ngOnInit() {
-	// this.products$
-	// 	.pipe(
-	// 		takeUntil(this.destroy$),
-	// 	)
-	// 	.subscribe((products) => {
-	// 		this.products = products;
-	// 		this.changeDetectorRef.markForCheck();
-	// 	})
-	// }
-
-	// ngOnDestroy() {
-	// this.subsription?.unsubscribe();
-	// this.destroy$.next();
-	// this.destroy$.complete();
-	// }
 
 	trackBy(_: number, item: IProduct) {
 		return item._id;

@@ -8,7 +8,7 @@ import { BASE_URL } from '../base-url/base-url.token';
 import { IProduct } from './product.interface';
 import { IProductsDto } from './products-dto.interface';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ProductsApiService {
 	constructor(private http: HttpClient) {}
 
