@@ -22,4 +22,8 @@ export class ProductsApiService {
 				pluck('data', 'items')
 			);
 	}
+
+	getProduct$(id: string): Observable<IProduct | undefined> {
+		return this.http.get<{ data: IProduct }>(`/products/${id}`).pipe(pluck('data'));
+	}
 }

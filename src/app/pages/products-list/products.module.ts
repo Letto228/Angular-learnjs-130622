@@ -9,8 +9,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ForModule } from '../../shared/for/for.module';
 import { CarouselModule } from '../../shared/carousel/carousel.module';
-import { JsonPipeModule } from '../../shared/json-pipe/json-pipe.module';
 import { SerachFilterModule } from '../../shared/serach-filter/serach-filter.module';
+import { ProductsRoutingModuleModule } from './products-routing.module';
+import { OBJECT_NAME } from '../../shared/object-name/object-name.token';
 
 @NgModule({
 	declarations: [ProductsComponent, ProductCardComponent],
@@ -24,13 +25,8 @@ import { SerachFilterModule } from '../../shared/serach-filter/serach-filter.mod
 		CarouselModule,
 		MatInputModule,
 		SerachFilterModule,
+		ProductsRoutingModuleModule,
 	],
-	// providers: [
-	// 	{
-	// 		provide: 'ProductsStoreService',
-	// 		useValue: {},
-	// 	},
-	// ],
 	exports: [ProductsComponent],
 })
 export class ProductsModule {}

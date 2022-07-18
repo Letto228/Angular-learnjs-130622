@@ -4,7 +4,6 @@ import {
 	Component,
 	ContentChild,
 	EventEmitter,
-	Inject,
 	OnInit,
 	Output,
 	TemplateRef,
@@ -37,14 +36,9 @@ export class SidenavComponent implements OnInit {
 
 	@ContentChild('list', { static: true }) private listTemplate!: TemplateRef<unknown>;
 
-	constructor(
-		private changeDetectorRef: ChangeDetectorRef,
-		@Inject(OBJECT_NAME) private readonly objectName: string
-	) {}
+	constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
 	ngOnInit() {
-		console.log(this.objectName);
-
 		this.insertList(this.listTemplate);
 
 		setTimeout(() => {
