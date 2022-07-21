@@ -2,57 +2,45 @@ import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
-	ContentChild,
 	EventEmitter,
 	OnInit,
 	Output,
-	TemplateRef,
 	ViewChild,
-	ViewContainerRef,
 } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
-import { OBJECT_NAME } from '../../shared/object-name/object-name.token';
+import { CategoriesStoreService } from '../../shared/categories/categories-store.service';
+import { ISubCategory } from '../../shared/categories/sub-category.interface';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-sidenav',
 	templateUrl: './sidenav.component.html',
 	styleUrls: ['./sidenav.component.less'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	providers: [
-		{
-			provide: OBJECT_NAME,
-			useFactory: () => {
-				return 'SidenavComponent';
-			},
-		},
-	],
 })
 export class SidenavComponent implements OnInit {
 	@Output() isShadowActive = new EventEmitter<boolean>();
 
+	readonly categories$ = this.categoriesStoreService.categories$;
+
 	@ViewChild(MatDrawer, { static: true }) private drawerComponent!: MatDrawer;
-	@ViewChild('drawerViewPort', { static: true, read: ViewContainerRef })
-	private drawerViewPortElement!: ViewContainerRef;
 
-	@ContentChild('list', { static: true }) private listTemplate!: TemplateRef<unknown>;
-
-	constructor(private changeDetectorRef: ChangeDetectorRef) {}
+	constructor(
+		private readonly changeDetectorRef: ChangeDetectorRef,
+		private readonly categoriesStoreService: CategoriesStoreService,
+		private readonly router: Router
+	) {}
 
 	ngOnInit() {
-		this.insertList(this.listTemplate);
+		this.categoriesStoreService.loadCategories();
+	}
 
-		setTimeout(() => {
-			this.isShadowActive.emit(true);
-		}, 2000);
+	onSubCategorySelect(subCategory: ISubCategory) {
+		this.router.navigate(['/products-list', subCategory._id]);
 	}
 
 	toggleDrawer() {
 		this.drawerComponent.toggle();
 		this.changeDetectorRef.markForCheck();
-	}
-
-	private insertList(template: TemplateRef<unknown>) {
-		this.drawerViewPortElement.clear();
-		this.drawerViewPortElement.createEmbeddedView(template);
 	}
 }

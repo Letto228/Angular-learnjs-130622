@@ -1,19 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { ProductComponent } from './pages/product/product.component';
-import { ProductsComponent } from './pages/products-list/products.component';
-import { ProductsModule } from './pages/products-list/products.module';
 
 const routes: Routes = [
 	{
-		path: 'products-list', // ...localhost:4200/products-list === ...localhost:4200/products-list/''
-		// component: ProductsComponent,
+		path: 'products-list',
 		loadChildren: () => import('./pages/products-list/products.module').then((m) => m.ProductsModule),
 	},
 	{
-		path: 'product', // ...localhost:4200/product === ...localhost:4200/product/''
-		// component: ProductComponent,
+		path: 'product',
+		// canActivate: [QuestionCanActivateGuard],
+		// canLoad: [QuestionCanLoadGuard],
 		loadChildren: () => import('./pages/product/product.module').then((m) => m.ProductModule),
 	},
 	{

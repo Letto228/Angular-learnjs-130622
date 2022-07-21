@@ -15,6 +15,10 @@ export class ProductsStoreService {
 		return this.productsStore$.asObservable();
 	}
 
+	get products(): IProduct[] | null {
+		return this.productsStore$.value;
+	}
+
 	getProduct(id: string): Observable<IProduct | undefined> {
 		return this.products$.pipe(
 			filter(Boolean),
@@ -22,8 +26,8 @@ export class ProductsStoreService {
 		);
 	}
 
-	loadProducts() {
-		this.productsApi.getProducts$().subscribe((products) => {
+	loadProducts(subCategoryId?: string | null) {
+		this.productsApi.getProducts$(subCategoryId).subscribe((products) => {
 			this.productsStore$.next(products);
 		});
 	}

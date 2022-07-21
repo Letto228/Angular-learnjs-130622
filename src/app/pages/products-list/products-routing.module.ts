@@ -5,6 +5,13 @@ import { ProductsComponent } from './products.component';
 const routes: Routes = [
 	{
 		path: '',
+		// resolve: {
+		// 	products: LoadProductsResolver,
+		// },
+		component: ProductsComponent,
+	},
+	{
+		path: ':subCategoryId',
 		component: ProductsComponent,
 	},
 ];

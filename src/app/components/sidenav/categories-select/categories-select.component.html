@@ -1,0 +1,19 @@
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let category of categories" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{category.name}}
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="sub-catigories-container">
+            <button
+                *ngFor="let subCategory of category.subCategories"
+                mat-button
+                hideToggle
+                (click)="selectSubCategory.emit(subCategory)"
+            >
+                {{subCategory.name}}
+            </button>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

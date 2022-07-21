@@ -4,7 +4,10 @@
         class="example-sidenav"
         mode="side"
     >
-        <ng-container #drawerViewPort id="div"></ng-container>
+        <app-categories-select
+            [categories]="categories$ | async"
+            (selectSubCategory)="onSubCategorySelect($event)"
+        ></app-categories-select>
     </mat-drawer>
   
     <div class="example-sidenav-content">
