@@ -11,7 +11,8 @@ import { ForModule } from '../../shared/for/for.module';
 import { CarouselModule } from '../../shared/carousel/carousel.module';
 import { SerachFilterModule } from '../../shared/serach-filter/serach-filter.module';
 import { ProductsRoutingModuleModule } from './products-routing.module';
-import { OBJECT_NAME } from '../../shared/object-name/object-name.token';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ValidatorsDirectivesModule } from '../../shared/validators/directives/validators-directives/validators-directives.module';
 
 @NgModule({
 	declarations: [ProductsComponent, ProductCardComponent],
@@ -26,6 +27,9 @@ import { OBJECT_NAME } from '../../shared/object-name/object-name.token';
 		MatInputModule,
 		SerachFilterModule,
 		ProductsRoutingModuleModule,
+		FormsModule,
+		ReactiveFormsModule,
+		ValidatorsDirectivesModule,
 	],
 	exports: [ProductsComponent],
 })
