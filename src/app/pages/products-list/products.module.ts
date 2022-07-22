@@ -10,6 +10,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ForModule } from '../../shared/for/for.module';
 import { CarouselModule } from '../../shared/carousel/carousel.module';
 import { SerachFilterModule } from '../../shared/serach-filter/serach-filter.module';
+import { SearchModule } from "../../shared/search/search.module";
 import { ProductsRoutingModuleModule } from './products-routing.module';
 import { OBJECT_NAME } from '../../shared/object-name/object-name.token';
 
@@ -25,6 +26,7 @@ import { OBJECT_NAME } from '../../shared/object-name/object-name.token';
 		CarouselModule,
 		MatInputModule,
 		SerachFilterModule,
+    SearchModule,
 		ProductsRoutingModuleModule,
 	],
 	exports: [ProductsComponent],
