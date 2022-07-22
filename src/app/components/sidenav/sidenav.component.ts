@@ -11,12 +11,21 @@ import {
 	ViewContainerRef,
 } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
+import { OBJECT_NAME } from '../../shared/object-name/object-name.token';
 
 @Component({
 	selector: 'app-sidenav',
 	templateUrl: './sidenav.component.html',
 	styleUrls: ['./sidenav.component.less'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	providers: [
+		{
+			provide: OBJECT_NAME,
+			useFactory: () => {
+				return 'SidenavComponent';
+			},
+		},
+	],
 })
 export class SidenavComponent implements OnInit {
 	@Output() isShadowActive = new EventEmitter<boolean>();
