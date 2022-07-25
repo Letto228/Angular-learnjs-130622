@@ -2,7 +2,11 @@
 <app-sidenav #sidenav appInsertShadow>
     <input #input type="text">
     <app-products></app-products>
-
+<!--    <ng-template #list let-implicit let-name="name" let-user="user">-->
+<!--      {{implicit}}-->
+<!--      {{name}}-->
+<!--      {{user.age}}-->
+<!--    </ng-template>-->
     <ng-template #list>
         <mat-list appInsertShadow role="list" class="mat-list">
             <mat-list-item #listItem role="listitem">Item 1</mat-list-item>
@@ -11,4 +15,4 @@
         </mat-list>
     </ng-template>
 </app-sidenav>
-<app-popup-host [template]="list"></app-popup-host>
+<!--<app-popup-host [template]="list"></app-popup-host>-->

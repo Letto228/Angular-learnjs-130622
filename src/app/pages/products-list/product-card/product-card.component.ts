@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IProduct } from '../../../shared/products/product.interface';
 
 @Component({
@@ -7,8 +7,8 @@ import { IProduct } from '../../../shared/products/product.interface';
 	styleUrls: ['./product-card.component.less'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductCardComponent {
-	@Input() product!: IProduct;
+export class ProductCardComponent implements OnInit {
+	@Input() product: IProduct | undefined;
 
 	@Output() buyProduct = new EventEmitter<void>();
 
@@ -16,5 +16,21 @@ export class ProductCardComponent {
 		event.stopPropagation();
 
 		this.buyProduct.emit();
+	}
+
+	// prev!: () => void;
+	// next!: () => void;
+	//
+	// onRegisterPrev(fn: () => void) {
+	//   this.prev = fn;
+	// }
+	//
+
+	get imgSrc(): string {
+		return this.product?.images[0].url || '';
+	}
+
+	ngOnInit() {
+		console.log('ProductCardComponent created');
 	}
 }

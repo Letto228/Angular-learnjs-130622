@@ -1,5 +1,43 @@
 <!-- <button [appNgClass]="{hover: isHovered}" [ngStyle]="{color: '#fff'}">Button</button> -->
-<app-product-card class="product" [product]="products[0]"></app-product-card>
-<app-product-card class="product" [product]="products[1]"></app-product-card>
-<app-product-card class="product" [product]="products[2]"></app-product-card>
-<app-product-card class="product" [product]="products[3]"></app-product-card>
+<div *ngIf="products; else spinner" class="container">
+<!--  <ng-container *appCarousel="let content of ...;">-->
+    <!--<ng-template [ngIf]="products" [ngIfElse]="spinner">-->
+
+      <!--    <ng-template ngFor let-product let-index="index" [ngForOf]="products" [ngForTrackBy]="trackBy">-->
+      <!--      <app-product-card class="product" [product]="products[index]"></app-product-card>-->
+      <!--    </ng-template>-->
+      <!--    *ngFor="products" [ngForTrackBy]="trackBy">-->
+
+      <app-product-card *ngFor="let product of products trackBy: trackBy; let index = index"
+        class="product" [product]="products[index]">
+      </app-product-card>
+
+
+    <!--</ng-template>-->
+
+<!--    <ng-template #spinner >-->
+<!--      <mat-spinner class="spinner"></mat-spinner>-->
+<!--    </ng-template>-->
+
+
+
+<!--    <div>-->
+<!--      <button mat-icon-button (click)="prev()">-->
+<!--        <mat-icon>-->
+<!--          chevron_left-->
+<!--        </mat-icon>-->
+<!--      </button>-->
+<!--      <span>numbers of pages</span>-->
+<!--      <button mat-icon-button (click)="next()">-->
+<!--        <mat-icon>-->
+<!--          chevron_right-->
+<!--        </mat-icon>-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </ng-container>-->
+</div>
+<ng-template #spinner >
+  <mat-spinner class="spinner"></mat-spinner>
+</ng-template>
+
+

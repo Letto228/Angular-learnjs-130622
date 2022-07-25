@@ -45,5 +45,19 @@ export class SidenavComponent implements OnInit {
 	private insertList(template: TemplateRef<unknown>) {
 		this.drawerViewPortElement.clear();
 		this.drawerViewPortElement.createEmbeddedView(template);
+
+		// setTimeout(() => {
+		//   this.drawerViewPortElement.clear();
+		//   this.drawerViewPortElement.createEmbeddedView(template,
+		//     {
+		//       name: 'Egor',
+		//       $implicit: 'Angular LearnJs',
+		//       user: {
+		//         age: '35',
+		//       }
+		//     });
+		//
+		//   this.changeDetectorRef.markForCheck();
+		// }, 3000)
 	}
 }
