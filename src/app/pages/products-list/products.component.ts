@@ -12,10 +12,12 @@ import {
 	takeUntil,
 	tap,
 } from 'rxjs';
+import { BrandsService } from '../../shared/brands/brands.service';
 import { IProduct } from '../../shared/products/product.interface';
 import { ProductsStoreService } from '../../shared/products/products-store.service';
 import { isStringAsyncValidator } from '../../shared/validators/is-string-async.validator';
 import { isStringValidator } from '../../shared/validators/is-string.validator';
+import { IProductsFilter } from './products-filter.interface';
 
 @Component({
 	selector: 'app-products',
@@ -27,6 +29,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 	private readonly destroy$ = new Subject<void>();
 
 	readonly products$ = this.productsStoreService.products$;
+	readonly brands$ = this.brandsService.brands$;
 
 	searchText = '';
 	searchTextControl = new FormControl('12', {
@@ -49,6 +52,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private readonly productsStoreService: ProductsStoreService,
+		private readonly brandsService: BrandsService,
 		private readonly activatedRoute: ActivatedRoute,
 		private readonly changeDetectorRef: ChangeDetectorRef
 	) {}
@@ -75,6 +79,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
 		return item._id;
 	}
 
+	onFilterChange(filter: IProductsFilter) {
+		console.log(filter);
+	}
+
 	private listenLoadProducts() {
 		this.activatedRoute.paramMap
 			.pipe(
@@ -83,6 +91,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 			)
 			.subscribe((subCategoryId) => {
 				this.productsStoreService.loadProducts(subCategoryId);
+				this.brandsService.loadBrands(subCategoryId);
 			});
 	}
 }

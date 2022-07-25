@@ -1,0 +1,12 @@
+<ng-content></ng-content>
+<button mat-icon-button (click)="back()" [disabled]="isDisable">
+    <mat-icon>
+        chevron_left
+    </mat-icon>
+</button>
+<p>{{counter}}</p>
+<button mat-icon-button (click)="next()" [disabled]="isDisable">
+    <mat-icon>
+        chevron_right
+    </mat-icon>
+</button>

@@ -13,11 +13,15 @@
     >
 </mat-form-field>
 {{input.errors | json}} -->
-<mat-form-field class="example-form-field" appearance="fill">
+<!-- <mat-form-field class="example-form-field" appearance="fill">
     <mat-label>Search</mat-label>
     <input matInput [formControl]="searchTextControl" type="text">
 </mat-form-field>
-{{searchTextControl.errors | json}}
+{{searchTextControl.errors | json}} -->
+<app-products-filter
+    [brands]="brands$ | async"
+    (changeFilter)="onFilterChange($event)"
+></app-products-filter>
 
 <!-- <div
     *ngIf="

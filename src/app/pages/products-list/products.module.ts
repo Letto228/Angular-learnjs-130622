@@ -13,9 +13,12 @@ import { SerachFilterModule } from '../../shared/serach-filter/serach-filter.mod
 import { ProductsRoutingModuleModule } from './products-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ValidatorsDirectivesModule } from '../../shared/validators/directives/validators-directives/validators-directives.module';
+import { ProductsFilterComponent } from './products-filter/products-filter.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CounterInputModule } from '../../shared/counter-input/counter-input.module';
 
 @NgModule({
-	declarations: [ProductsComponent, ProductCardComponent],
+	declarations: [ProductsComponent, ProductCardComponent, ProductsFilterComponent],
 	imports: [
 		CommonModule,
 		MatCardModule,
@@ -30,6 +33,8 @@ import { ValidatorsDirectivesModule } from '../../shared/validators/directives/v
 		FormsModule,
 		ReactiveFormsModule,
 		ValidatorsDirectivesModule,
+		MatCheckboxModule,
+		CounterInputModule,
 	],
 	exports: [ProductsComponent],
 })
