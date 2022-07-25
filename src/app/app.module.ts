@@ -12,6 +12,16 @@ import { ProductsApiService } from './shared/products/products-api.service';
 import { BaseUrlInterceptor } from './shared/base-url/base-url.interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { StoreModule } from '@ngrx/store';
+import { storeReducer } from './store/reducer';
+
+const devtoolsInstruments = [];
+
+if (!environment.production) {
+	devtoolsInstruments.push(StoreDevtoolsModule.instrument());
+}
 
 @NgModule({
 	declarations: [AppComponent, NotFoundComponent],
@@ -25,6 +35,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 		MatListModule,
 		InsertShadowModule,
 		HttpClientModule,
+		StoreModule.forRoot(storeReducer),
+		...devtoolsInstruments,
 	],
 	providers: [
 		{
