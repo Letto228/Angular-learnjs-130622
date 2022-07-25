@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { productsMock } from '../../shared/products/products.mock';
 import { Direction } from '../../shared/scroll-load/direction.enum';
 
@@ -8,19 +8,12 @@ import { Direction } from '../../shared/scroll-load/direction.enum';
 	styleUrls: ['./products.component.less'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
 	readonly products = productsMock;
 	isLoadingData = false;
 	// isHovered = true;
 
 	constructor(private changeDetectorRef: ChangeDetectorRef) {}
-
-	ngOnInit() {
-		setTimeout(() => {
-			// this.isHovered = false;
-		}, 3000);
-		this.changeDetectorRef.markForCheck();
-	}
 
 	onScrollLoad(direction: Direction) {
 		console.log(direction);

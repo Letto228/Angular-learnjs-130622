@@ -9,8 +9,8 @@ export class ScrollLoadDirective {
 
 	@Output() scrollLoadEvent = new EventEmitter<Direction>();
 
-	scrollPosition: number = 0;
-	offset: number = 100;
+	readonly scrollPosition: number = 0;
+	readonly offset: number = 100;
 
 	constructor(private elementRef: ElementRef) {}
 
