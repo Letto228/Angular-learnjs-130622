@@ -15,7 +15,7 @@ import { IState } from '../../store/reducer';
 	styleUrls: ['./product.component.less'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent {
 	readonly product$ = this.activatedRoute.paramMap.pipe(
 		map((paramMap) => paramMap.get('id')),
 		filter(Boolean),
@@ -36,11 +36,11 @@ export class ProductComponent implements OnInit {
 		private readonly store: Store<IState>
 	) {}
 
-	ngOnInit(): void {
-		// setTimeout(() => {
-		//   this.router.navigate(['/product', 'kommutator-tp-link-t1600g-52ts']);
-		// }, 3000)
-	}
+	// ngOnInit() {
+	// setTimeout(() => {
+	//   this.router.navigate(['/product', 'kommutator-tp-link-t1600g-52ts']);
+	// }, 3000)
+	// }
 
 	// navigateTo(segment: string) {
 	//   this.router.navigate([segment], {relativeTo: this.activatedRoute});

@@ -59,7 +59,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
 	constructor(
 		// private readonly productsStoreService: ProductsStoreService,
-		private readonly productsApiService: ProductsApiService,
 		private readonly brandsService: BrandsService,
 		private readonly activatedRoute: ActivatedRoute,
 		private readonly changeDetectorRef: ChangeDetectorRef,

@@ -14,16 +14,14 @@ export class BaseUrlInterceptor implements HttpInterceptor {
 		});
 
 		return next.handle(newRequest);
-		// return next.handle(newRequest).pipe(
-		// map((httpResponse: HttpEvent<unknown>) => {
-		//   if (httpResponse typeof HttpRequest) {
-
-		//   }
-		// }),
-		// catchError(() => {
-		//   console.log('error');
-		//   return of(new HttpResponse({body: {items: productsMock}}));
-		// }),
+		// .pipe(
+		// 	tap(console.log),
+		// 	map(event => event instanceof HttpResponse
+		// 		? (event as HttpResponse<any>).clone({
+		// 			body: (event as HttpResponse<any>)?.body?.['data']?.['items']
+		// 		})
+		// 		: event
+		// 	)
 		// );
 	}
 }

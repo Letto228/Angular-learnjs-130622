@@ -1,8 +1,8 @@
-import { NgClassDirective } from './ng-class.directive';
+// import { NgClassDirective } from './ng-class.directive';
 
-describe('NgClassDirective', () => {
-	it('should create an instance', () => {
-		const directive = new NgClassDirective();
-		expect(directive).toBeTruthy();
-	});
-});
+// describe('NgClassDirective', () => {
+// 	it('should create an instance', () => {
+// 		const directive = new NgClassDirective();
+// 		expect(directive).toBeTruthy();
+// 	});
+// });

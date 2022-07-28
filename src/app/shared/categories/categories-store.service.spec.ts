@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+// import { TestBed } from '@angular/core/testing';
 
-import { CategoriesStoreService } from './categories-store.service';
+// import { CategoriesStoreService } from './categories-store.service';
 
-describe('CategoriesStoreService', () => {
-	let service: CategoriesStoreService;
+// describe('CategoriesStoreService', () => {
+// 	let service: CategoriesStoreService;
 
-	beforeEach(() => {
-		TestBed.configureTestingModule({});
-		service = TestBed.inject(CategoriesStoreService);
-	});
+// 	beforeEach(() => {
+// 		TestBed.configureTestingModule({});
+// 		service = TestBed.inject(CategoriesStoreService);
+// 	});
 
-	it('should be created', () => {
-		expect(service).toBeTruthy();
-	});
-});
+// 	it('should be created', () => {
+// 		expect(service).toBeTruthy();
+// 	});
+// });

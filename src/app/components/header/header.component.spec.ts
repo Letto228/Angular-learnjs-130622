@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { HeaderComponent } from './header.component';
+import { HeaderModule } from './header.module';
 
 describe('HeaderComponent', () => {
 	let component: HeaderComponent;
@@ -8,7 +10,7 @@ describe('HeaderComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [HeaderComponent],
+			imports: [HeaderModule],
 		}).compileComponents();
 	});
 
@@ -18,7 +20,26 @@ describe('HeaderComponent', () => {
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
+	it('Клик по меню async', (done) => {
+		const trigerEvent = new Event('click');
+		const debugElement = fixture.debugElement;
+
+		component.menuClick.subscribe((event) => {
+			expect(event).toEqual(trigerEvent);
+
+			done();
+		});
+
+		debugElement.query(By.css('[integration-id="header-menu-button"]')).triggerEventHandler('click', trigerEvent);
+	});
+
+	it('Клик по меню sync', () => {
+		const trigerEvent = new Event('click');
+		const debugElement = fixture.debugElement;
+		const menuClickEmitSpy = spyOn(component.menuClick, 'emit');
+
+		debugElement.query(By.css('[integration-id="header-menu-button"]')).triggerEventHandler('click', trigerEvent);
+
+		expect(menuClickEmitSpy).toHaveBeenCalled();
 	});
 });
