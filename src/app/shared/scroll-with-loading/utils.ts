@@ -5,6 +5,5 @@ export function isScrollReachedTop(scrollTop: number, prevScrollTop: number): bo
 }
 
 export function isScrollReachedBottom(scrollTop: number, lowerScrollPosition: number, prevScrollTop: number): boolean {
-	console.log(lowerScrollPosition, scrollTop, prevScrollTop);
 	return lowerScrollPosition - scrollTop < scrollThreshold && scrollTop > prevScrollTop;
 }

@@ -1,7 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 import { filter, map, switchMap, tap } from 'rxjs';
+import { IProduct } from '../../shared/products/product.interface';
+import { ProductsApiService } from '../../shared/products/products-api.service';
 import { ProductsStoreService } from '../../shared/products/products-store.service';
+import { addProducts, loadProduct } from '../../store/products/products.actions';
+import { productSelector } from '../../store/products/products.selector';
+import { IState } from '../../store/reducer';
 
 @Component({
 	selector: 'app-product',
@@ -14,20 +20,23 @@ export class ProductComponent implements OnInit {
 		map((paramMap) => paramMap.get('id')),
 		filter(Boolean),
 		tap((id) => {
-			this.productsStoreService.loadProduct(id);
+			// this.productsStoreService.loadProduct(id);
+			// this.productsApiService.getProduct$(id).subscribe(product => {
+			// 	this.store.dispatch(addProducts([product as IProduct]));
+			// })
+			this.store.dispatch(loadProduct(id));
 		}),
-		switchMap((id) => this.productsStoreService.getProduct(id)),
-		tap(console.log)
+		switchMap((id) => this.store.pipe(select(productSelector(id))))
 	);
 
 	constructor(
 		private readonly activatedRoute: ActivatedRoute,
 		private readonly router: Router,
-		private readonly productsStoreService: ProductsStoreService
+		private readonly productsApiService: ProductsApiService,
+		private readonly store: Store<IState>
 	) {}
 
 	ngOnInit(): void {
-		console.log('id', this.activatedRoute.snapshot.params['id']);
 		// setTimeout(() => {
 		//   this.router.navigate(['/product', 'kommutator-tp-link-t1600g-52ts']);
 		// }, 3000)

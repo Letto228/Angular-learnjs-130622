@@ -1,22 +1,28 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 import {
 	auditTime,
 	debounceTime,
 	distinctUntilChanged,
 	map,
 	Observable,
+	pluck,
 	startWith,
 	Subject,
+	switchMap,
 	takeUntil,
 	tap,
 } from 'rxjs';
 import { BrandsService } from '../../shared/brands/brands.service';
 import { IProduct } from '../../shared/products/product.interface';
-import { ProductsStoreService } from '../../shared/products/products-store.service';
+import { ProductsApiService } from '../../shared/products/products-api.service';
 import { isStringAsyncValidator } from '../../shared/validators/is-string-async.validator';
-import { isStringValidator } from '../../shared/validators/is-string.validator';
+import { addProducts, loadProducts, updateProductsFilrer } from '../../store/products/products.actions';
+import { productsFilterSearchNameSelector, productsSelector } from '../../store/products/products.selector';
+import { PRODUCTS_FEATURE } from '../../store/products/products.state';
+import { IState } from '../../store/reducer';
 import { IProductsFilter } from './products-filter.interface';
 
 @Component({
@@ -28,15 +34,16 @@ import { IProductsFilter } from './products-filter.interface';
 export class ProductsComponent implements OnInit, OnDestroy {
 	private readonly destroy$ = new Subject<void>();
 
-	readonly products$ = this.productsStoreService.products$;
+	// readonly products$ = this.productsStoreService.products$;
+	readonly products$ = this.store.pipe(select(productsSelector));
 	readonly brands$ = this.brandsService.brands$;
 
-	searchText = '';
-	searchTextControl = new FormControl('12', {
-		validators: [Validators.minLength(3)],
-		asyncValidators: this.isStringAsyncValidator.bind(this),
-		updateOn: 'change',
-	});
+	// searchText = '';
+	// searchTextControl = new FormControl('12', {
+	// 	validators: [Validators.minLength(3)],
+	// 	asyncValidators: this.isStringAsyncValidator.bind(this),
+	// 	updateOn: 'change',
+	// });
 
 	private isStringAsyncValidator(control: AbstractControl): Observable<ValidationErrors | null> {
 		return isStringAsyncValidator(control).pipe(
@@ -51,18 +58,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
 	// );
 
 	constructor(
-		private readonly productsStoreService: ProductsStoreService,
+		// private readonly productsStoreService: ProductsStoreService,
+		private readonly productsApiService: ProductsApiService,
 		private readonly brandsService: BrandsService,
 		private readonly activatedRoute: ActivatedRoute,
-		private readonly changeDetectorRef: ChangeDetectorRef
+		private readonly changeDetectorRef: ChangeDetectorRef,
+		private readonly store: Store<IState>
 	) {}
 
-	searchText$ = this.searchTextControl.valueChanges.pipe(
-		startWith(this.searchTextControl.value),
-		debounceTime(300),
-		distinctUntilChanged(),
-		tap(console.log)
-	);
+	searchText$ = this.store.pipe(select(productsFilterSearchNameSelector));
 
 	ngOnInit() {
 		this.listenLoadProducts();
@@ -80,17 +84,24 @@ export class ProductsComponent implements OnInit, OnDestroy {
 	}
 
 	onFilterChange(filter: IProductsFilter) {
-		console.log(filter);
+		this.store.dispatch(updateProductsFilrer(filter));
+		// console.log(filter);
 	}
 
 	private listenLoadProducts() {
 		this.activatedRoute.paramMap
 			.pipe(
 				map((paramsMap) => paramsMap.get('subCategoryId')),
+				// tap(subCategoryId => {
+				// 	this.brandsService.loadBrands(subCategoryId);
+				// }),
+				// switchMap((subCategoryId) => this.productsApiService.getProducts$(subCategoryId)),
 				takeUntil(this.destroy$)
 			)
 			.subscribe((subCategoryId) => {
-				this.productsStoreService.loadProducts(subCategoryId);
+				// this.productsStoreService.loadProducts(subCategoryId);
+				// this.store.dispatch(addProducts(products));
+				this.store.dispatch(loadProducts(subCategoryId));
 				this.brandsService.loadBrands(subCategoryId);
 			});
 	}

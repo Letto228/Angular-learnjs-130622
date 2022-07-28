@@ -1,12 +1,4 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	Input,
-	OnChanges,
-	SimpleChange,
-	SimpleChanges,
-	TemplateRef,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, TemplateRef } from '@angular/core';
 
 @Component({
 	selector: 'app-popup-host',
@@ -14,10 +6,6 @@ import {
 	styleUrls: ['./popup-host.component.less'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PopupHostComponent implements OnChanges {
+export class PopupHostComponent {
 	@Input() template: TemplateRef<unknown> | undefined;
-
-	ngOnChanges(changes: SimpleChanges) {
-		console.log(changes);
-	}
 }

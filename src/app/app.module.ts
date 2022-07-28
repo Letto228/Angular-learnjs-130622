@@ -16,6 +16,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { storeReducer } from './store/reducer';
+import { storeEffects } from './store/effects';
+import { EffectsModule } from '@ngrx/effects';
 
 const devtoolsInstruments = [];
 
@@ -36,6 +38,7 @@ if (!environment.production) {
 		InsertShadowModule,
 		HttpClientModule,
 		StoreModule.forRoot(storeReducer),
+		EffectsModule.forRoot(storeEffects),
 		...devtoolsInstruments,
 	],
 	providers: [

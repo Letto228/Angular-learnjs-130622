@@ -8,8 +8,10 @@ import {
 	OnChanges,
 	SimpleChanges,
 	OnInit,
+	OnDestroy,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { debounceTime, Subject, takeUntil } from 'rxjs';
 import { IProductsFilter } from '../products-filter.interface';
 
 @Component({
@@ -18,8 +20,9 @@ import { IProductsFilter } from '../products-filter.interface';
 	styleUrls: ['./products-filter.component.less'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductsFilterComponent implements OnChanges, OnInit {
+export class ProductsFilterComponent implements OnChanges, OnInit, OnDestroy {
 	@Input() brands!: string[] | null;
+	@Input() filter!: IProductsFilter;
 
 	@Output() changeFilter = new EventEmitter<IProductsFilter>();
 
@@ -32,8 +35,10 @@ export class ProductsFilterComponent implements OnChanges, OnInit {
 	//   }
 	// }
 
+	private readonly destroy$ = new Subject<void>();
+
 	readonly filterForm = this.formBuilder.group({
-		name: ['Name', { validators: [Validators.required] }],
+		name: ['', { validators: [Validators.required] }],
 		brands: this.formBuilder.array([]),
 		priceRange: this.formBuilder.group({
 			min: 0,
@@ -45,7 +50,7 @@ export class ProductsFilterComponent implements OnChanges, OnInit {
 
 	// brandsSubscriber: Subscription | undefined;
 
-	ngOnChanges({ brands }: SimpleChanges): void {
+	ngOnChanges({ brands, filter }: SimpleChanges): void {
 		if (brands) {
 			const brandsControlList: FormControl[] = this.brands ? this.brands.map(() => new FormControl(false)) : [];
 
@@ -62,25 +67,36 @@ export class ProductsFilterComponent implements OnChanges, OnInit {
 			//   )
 			//   .subscribe(console.log);
 		}
+
+		if (filter) {
+			this.filterForm.patchValue(this.filter);
+		}
 	}
 
-	ngOnInit(): void {
-		console.log(this.filterForm.get('name')?.value);
-		this.filterForm.valueChanges.subscribe(() => {
-			console.log(this.filterForm.getRawValue());
+	ngOnInit() {
+		this.filterForm.valueChanges.pipe(debounceTime(300), takeUntil(this.destroy$)).subscribe((filter) => {
+			this.changeFilter.emit(filter);
 		});
-		this.filterForm.get('priceRange')?.patchValue({
-			min: 1,
-			max: 2,
-		});
+		// this.filterForm.valueChanges.subscribe(() => {
+		// 	console.log(this.filterForm.getRawValue());
+		// });
+		// this.filterForm.get('priceRange')?.patchValue({
+		// 	min: 1,
+		// 	max: 2,
+		// });
 
-		setTimeout(() => {
-			this.filterForm.updateValueAndValidity();
-			this.filterForm.get(['priceRange', 'min'])?.disable();
-		}, 2000);
-		setTimeout(() => {
-			this.filterForm.get(['priceRange', 'min'])?.enable();
-		}, 3000);
+		// setTimeout(() => {
+		// 	this.filterForm.updateValueAndValidity();
+		// 	this.filterForm.get(['priceRange', 'min'])?.disable();
+		// }, 2000);
+		// setTimeout(() => {
+		// 	this.filterForm.get(['priceRange', 'min'])?.enable();
+		// }, 3000);
+	}
+
+	ngOnDestroy() {
+		this.destroy$.next();
+		this.destroy$.complete();
 	}
 
 	// onSubmit(value: any) {
@@ -117,10 +133,10 @@ export class ProductsFilterComponent implements OnChanges, OnInit {
 	}
 
 	onClick() {
-		console.log({
-			...this.filterForm.value,
-			brands: this.getBrandsListFromArray(this.filterForm.value.brands),
-		});
+		// console.log({
+		// 	...this.filterForm.value,
+		// 	brands: this.getBrandsListFromArray(this.filterForm.value.brands),
+		// });
 	}
 
 	// onTogleBrand(isActive: boolean, brand: string) {

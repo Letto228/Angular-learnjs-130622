@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NoPreloading, PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { CustomPreloading } from './custom-preloading/custom-preloading';
 
 const routes: Routes = [
 	{
@@ -12,6 +13,9 @@ const routes: Routes = [
 		// canActivate: [QuestionCanActivateGuard],
 		// canLoad: [QuestionCanLoadGuard],
 		loadChildren: () => import('./pages/product/product.module').then((m) => m.ProductModule),
+		data: {
+			preload: true,
+		},
 	},
 	{
 		path: '',
@@ -25,7 +29,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes)],
+	imports: [
+		RouterModule.forRoot(routes, {
+			preloadingStrategy: CustomPreloading,
+		}),
+	],
 	exports: [RouterModule],
 })
 export class AppRoutingModule {}

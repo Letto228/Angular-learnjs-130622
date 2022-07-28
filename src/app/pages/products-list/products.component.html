@@ -50,7 +50,7 @@
             <app-product-card
                 *ngFor="let product of content; trackBy: trackBy; let index = index"
                 class="product"
-                [routerLink]="'../product/' + product._id"
+                [routerLink]="'/product/' + product._id"
                 [product]="product"
             ></app-product-card>
         </div>
