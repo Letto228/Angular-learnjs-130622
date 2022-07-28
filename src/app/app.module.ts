@@ -8,7 +8,6 @@ import { MatListModule } from '@angular/material/list';
 import { PopupHostModule } from './components/popup-host/popup-host.module';
 import { InsertShadowModule } from './shared/insert-shadow/insert-shadow.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ProductsApiService } from './shared/products/products-api.service';
 import { BaseUrlInterceptor } from './shared/base-url/base-url.interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -42,10 +41,6 @@ if (!environment.production) {
 		...devtoolsInstruments,
 	],
 	providers: [
-		{
-			provide: ProductsApiService,
-			useClass: ProductsApiService,
-		},
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: BaseUrlInterceptor,

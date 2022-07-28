@@ -21,12 +21,3 @@ export const updateProductsFilrer = createAction(
 	ProductsActionTypes.UpdateProductsFilter,
 	(filter: IProductsFilter) => ({ filter })
 );
-
-// addProducts([...]) => {type: ProductsActionTypes.AddProducts, products: [...]}
-
-// export AddProducts {
-//  type: ProductsActionTypes.AddProducts
-//
-//  constructor(private readonly products) {}
-// }
-// new AddProducts([...]) => {type: ProductsActionTypes.AddProducts, products: [...]}

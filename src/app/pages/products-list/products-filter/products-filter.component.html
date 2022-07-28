@@ -1,39 +1,3 @@
-<!-- <form #form="ngForm" (ngSubmit)="onSubmit(form.value)">
-    <mat-form-field class="example-form-field" appearance="fill">
-        <mat-label>Search name</mat-label>
-        <input matInput [(ngModel)]="filter.name" type="text">
-        <input matInput ngModel name="nameFirst" type="text">
-    </mat-form-field>
-    <div ngModelGroup="brands" class="chacbox-container">
-        <mat-checkbox
-            *ngFor="let brand of brands; let index = index"
-            [ngModel]="filter.brands.includes(brand)"
-            (ngModelChange)="onTogleBrand($event, brand)"
-        >
-        <mat-checkbox
-            *ngFor="let brand of brands; let index = index"
-            ngModel
-            [name]="brand"
-        >
-            {{brand}}
-        </mat-checkbox>
-    </div>
-    <div ngModelGroup="priceRange" class="price-range">
-        <mat-form-field class="example-form-field" appearance="fill">
-            <mat-label>Min</mat-label>
-            <input matInput [(ngModel)]="filter.priceRange.min" type="number">
-            <input matInput ngModel name="min" type="number">
-        </mat-form-field>
-        <mat-form-field class="example-form-field" appearance="fill">
-            <mat-label>Max</mat-label>
-            <input matInput [(ngModel)]="filter.priceRange.max" type="number">
-            <input matInput ngModel name="max" type="number">
-        </mat-form-field>
-    </div>
-    
-    <input type="submit">
-</form> -->
-
 <form [formGroup]="filterForm">
     <mat-form-field class="example-form-field" appearance="fill">
         <mat-label>Search name</mat-label>
@@ -48,23 +12,19 @@
         </mat-checkbox>
     </div>
     <div formGroupName="priceRange" class="price-range">
-        <app-counter-input formControlName="min" [step]="300" class="example-form-field">
+        <app-counter-input
+            [step]="300"
+            formControlName="min"
+            class="example-form-field"
+        >
             Min
         </app-counter-input>
-        <app-counter-input formControlName="max" [step]="300" class="example-form-field">
+        <app-counter-input
+            [step]="300"
+            formControlName="max"
+            class="example-form-field"
+        >
             Max
         </app-counter-input>
-        <!-- <mat-form-field class="example-form-field" appearance="fill">
-            <mat-label>Min</mat-label>
-            <input matInput formControlName="min" type="number">
-        </mat-form-field>
-        <mat-form-field class="example-form-field" appearance="fill">
-            <mat-label>Max</mat-label>
-            <input matInput formControlName="max" type="number">
-        </mat-form-field> -->
     </div>
-    
-    <!-- <button (click)="onClick()">
-        Отправить
-    </button> -->
 </form>

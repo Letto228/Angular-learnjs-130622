@@ -11,13 +11,10 @@ export class ProductsApiService {
 
 	getProducts$(subCategoryId?: string | null): Observable<IProduct[]> {
 		return this.http
-			.get<IProduct[]>(`/products`, {
+			.get<IProductsDto>(`/products`, {
 				params: getParamsFromObject({ subCat: subCategoryId }),
 			})
-			.pipe
-			// map(({data}) => data.items),
-			// pluck('data', 'items')
-			();
+			.pipe(pluck('data', 'items'));
 	}
 
 	getProduct$(id: string): Observable<IProduct | undefined> {

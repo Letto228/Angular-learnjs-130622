@@ -1,8 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpResponse, HttpHeaders } from '@angular/common/http';
-import { catchError, map, Observable, of, pluck, tap } from 'rxjs';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { BASE_URL } from './base-url.token';
-import { productsMock } from '../products/products.mock';
 
 @Injectable()
 export class BaseUrlInterceptor implements HttpInterceptor {
@@ -14,14 +13,5 @@ export class BaseUrlInterceptor implements HttpInterceptor {
 		});
 
 		return next.handle(newRequest);
-		// .pipe(
-		// 	tap(console.log),
-		// 	map(event => event instanceof HttpResponse
-		// 		? (event as HttpResponse<any>).clone({
-		// 			body: (event as HttpResponse<any>)?.body?.['data']?.['items']
-		// 		})
-		// 		: event
-		// 	)
-		// );
 	}
 }

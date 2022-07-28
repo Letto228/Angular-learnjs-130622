@@ -27,16 +27,12 @@ export class CounterInputComponent implements ControlValueAccessor {
 	constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
 
 	writeValue(newCounter: any) {
-		// console.log(newCounter);
-
 		this.counter = newCounter;
 
 		this.changeDetectorRef.markForCheck();
 	}
 
 	setDisabledState(isDisable: boolean) {
-		// console.log(isDisable);
-
 		this.isDisable = isDisable;
 
 		this.changeDetectorRef.markForCheck();
@@ -55,7 +51,6 @@ export class CounterInputComponent implements ControlValueAccessor {
 
 		this.onChange(this.counter);
 		this.markTouched();
-		// console.log('back');
 	}
 
 	next() {
@@ -63,7 +58,6 @@ export class CounterInputComponent implements ControlValueAccessor {
 
 		this.onChange(this.counter);
 		this.markTouched();
-		// console.log('next');
 	}
 
 	private markTouched() {

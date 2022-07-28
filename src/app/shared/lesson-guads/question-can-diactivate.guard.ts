@@ -8,6 +8,5 @@ import { Observable } from 'rxjs';
 export class QuestionCanDiactivateGuard implements CanDeactivate<unknown> {
 	canDeactivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 		return window.prompt('Форма не сохраниться, хотите уйти?') === 'Yes';
-		// return component.isFormTouched() ? window.prompt('Форма не сохраниться, хотите уйти?') === 'Yes' : true;
 	}
 }

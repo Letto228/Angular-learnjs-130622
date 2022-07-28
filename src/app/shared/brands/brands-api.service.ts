@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, pluck } from 'rxjs';
+import { Observable, pluck } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',

@@ -1,35 +1,8 @@
-<!-- <mat-form-field class="example-form-field" appearance="fill">
-    <mat-label>Search</mat-label>
-    <input
-        #input="ngModel"
-        matInput
-        [(ngModel)]="searchText"
-        type="text"
-        [minlength]="3"
-        appIsStringAsync
-        [ngModelOptions]="{
-            updateOn: 'blur'
-        }"
-    >
-</mat-form-field>
-{{input.errors | json}} -->
-<!-- <mat-form-field class="example-form-field" appearance="fill">
-    <mat-label>Search</mat-label>
-    <input matInput [formControl]="searchTextControl" type="text">
-</mat-form-field>
-{{searchTextControl.errors | json}} -->
 <app-products-filter
     [brands]="brands$ | async"
     (changeFilter)="onFilterChange($event)"
 ></app-products-filter>
 
-<!-- <div
-    *ngIf="
-        ((products$ | async) | serachFilter : searchText : 'name') as products;
-        else spiner;
-    "
-    class="container"
-> -->
 <div
     *ngIf="
         ((products$ | async) | serachFilter : (searchText$ | async) : 'name') as products;

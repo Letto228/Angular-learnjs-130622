@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ProductComponent } from './product.component';
 import { RouterModule, Routes } from '@angular/router';
 import { TypeComponent } from './type/type.component';
@@ -23,27 +22,17 @@ const routes: Routes = [
 			{
 				path: 'type',
 				canActivate: [QuestionCanActivateGuard],
-				// canDeactivate: [QuestionCanDiactivateGuard],
 				component: TypeComponent,
 			},
 			{
 				path: 'description',
 				component: DescriptionComponent,
 			},
-			// {
-			// 	path: '',
-			// 	redirectTo: '/products-list',
-			// 	pathMatch: 'full',
-			// },
 			{
 				path: '',
 				redirectTo: 'description',
 				pathMatch: 'full',
 			},
-			// {
-			//   path: 'root',
-			//   redirectTo: '../../root/:id'
-			// }
 		],
 	},
 ];
