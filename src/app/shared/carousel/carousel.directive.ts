@@ -75,7 +75,7 @@ export class CarouselDirective<T> implements OnInit {
 	private getCurrentContext(index: number, items: T[]): ICarouselDirective<T> {
 		return {
 			index,
-			$implicit: items[index],
+			$implicit: items[index], // items c необходимым индексом.
 			prev: this.prev.bind(this),
 			next: () => {
 				this.next();

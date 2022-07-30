@@ -1,6 +1,6 @@
 <!-- <button [appNgClass]="{hover: isHovered}" [ngStyle]="{color: '#fff'}">Button</button> -->
 <div *ngIf="products; else spinner" class="container">
-<!--  <ng-container *appCarousel="let content of ...;">-->
+  <ng-container *appPagination="let content of products let prev = prev; let next = next; let index = index; let activeIndex = activeIndex">
     <!--<ng-template [ngIf]="products" [ngIfElse]="spinner">-->
 
       <!--    <ng-template ngFor let-product let-index="index" [ngForOf]="products" [ngForTrackBy]="trackBy">-->
@@ -8,8 +8,9 @@
       <!--    </ng-template>-->
       <!--    *ngFor="products" [ngForTrackBy]="trackBy">-->
 
-      <app-product-card *ngFor="let product of products trackBy: trackBy; let index = index"
-        class="product" [product]="products[index]">
+      <app-product-card *ngFor="let product of content trackBy: trackBy; let index = index"
+        class="product" [product]="product">
+        {{product}}
       </app-product-card>
 
 
@@ -21,20 +22,20 @@
 
 
 
-<!--    <div>-->
-<!--      <button mat-icon-button (click)="prev()">-->
-<!--        <mat-icon>-->
-<!--          chevron_left-->
-<!--        </mat-icon>-->
-<!--      </button>-->
-<!--      <span>numbers of pages</span>-->
-<!--      <button mat-icon-button (click)="next()">-->
-<!--        <mat-icon>-->
-<!--          chevron_right-->
-<!--        </mat-icon>-->
-<!--      </button>-->
-<!--    </div>-->
-<!--  </ng-container>-->
+    <div class="pagination">
+      <button class="pagination__button" mat-icon-button (click)="prev()">
+        <mat-icon>
+          chevron_left
+        </mat-icon>
+      </button>
+      <span class="pagination__button--active" (click)="activeIndex(index)">{{index}}</span>
+      <button class="pagination__button" mat-icon-button (click)="next()">
+        <mat-icon>
+          chevron_right
+        </mat-icon>
+      </button>
+    </div>
+  </ng-container>
 </div>
 <ng-template #spinner >
   <mat-spinner class="spinner"></mat-spinner>

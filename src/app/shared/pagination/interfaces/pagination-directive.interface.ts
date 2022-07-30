@@ -1,7 +1,7 @@
 export interface IPaginationDirective<T> {
-	$implicit: T;
+	$implicit: T | T[];
 	index: number;
 	prev: () => void;
 	next: () => void;
-	activeIndex: () => void;
+	activeIndex: (index: number) => void;
 }

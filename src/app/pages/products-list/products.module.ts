@@ -9,6 +9,7 @@ import { NgClassModule } from '../../shared/ng-class/ng-class.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ForModule } from '../../shared/for/for.module';
 import { CarouselModule } from '../../shared/carousel/carousel.module';
+import { PaginationModule } from '../../shared/pagination/pagination.module';
 
 @NgModule({
 	declarations: [ProductsComponent, ProductCardComponent],
@@ -21,6 +22,7 @@ import { CarouselModule } from '../../shared/carousel/carousel.module';
 		MatProgressSpinnerModule,
 		ForModule,
 		CarouselModule,
+		PaginationModule,
 	],
 	exports: [ProductsComponent],
 })
