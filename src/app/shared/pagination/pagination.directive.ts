@@ -53,7 +53,8 @@ export class PaginationDirective<T> implements OnInit {
 			next: () => {
 				this.next();
 			},
-			activeIndex: (index: number) => {
+			allIndexes: items.map((_, index) => index),
+			selectIndex: (index: number) => {
 				this.currentActivePage(index);
 			},
 		};

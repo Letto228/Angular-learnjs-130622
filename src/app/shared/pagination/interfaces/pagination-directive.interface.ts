@@ -3,5 +3,6 @@ export interface IPaginationDirective<T> {
 	index: number;
 	prev: () => void;
 	next: () => void;
-	activeIndex: (index: number) => void;
+	allIndexes: number[];
+	selectIndex: (index: number) => void;
 }

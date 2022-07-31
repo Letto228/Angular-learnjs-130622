@@ -26,11 +26,11 @@ export class ProductCardComponent implements OnInit {
 	// }
 	//
 
-	get imgSrc(): string {
-		return this.product?.images[0].url || '';
-	}
+	// get imgSrc(): string {
+	// 	return this.product?.images[0].url || '';
+	// }
 
 	ngOnInit() {
-		console.log('ProductCardComponent created');
+		console.log(this.product, 'ProductCardComponent created');
 	}
 }
