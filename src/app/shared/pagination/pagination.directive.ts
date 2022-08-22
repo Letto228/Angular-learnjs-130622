@@ -1,4 +1,4 @@
-import { Directive, Input, OnInit, Output, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, EventEmitter, Input, OnInit, Output, TemplateRef, ViewContainerRef } from '@angular/core';
 import { IPaginationDirective } from './interfaces/pagination-directive.interface';
 
 @Directive({
@@ -13,17 +13,16 @@ export class PaginationDirective<T> implements OnInit {
 
 		this.items = items;
 		this.currentIndex = 0;
+
+		this.insertTemplateWithCurrentIndex();
 	}
 
-	@Input() set activePageIndex(pageIndex: number) {
-		this.pageIndex = pageIndex;
-	}
-
-	@Output()
-	pageIndex: number = 4;
+	@Input('appPaginationElementSize') elementSize = 1;
+	@Output() emitSelectedIndex = new EventEmitter<() => void>();
 
 	private items: T[] | undefined = undefined;
 	private currentIndex: number = 0;
+	private allItems: T[] | undefined = undefined;
 
 	constructor(
 		private templateRef: TemplateRef<IPaginationDirective<T>>,
@@ -32,7 +31,7 @@ export class PaginationDirective<T> implements OnInit {
 
 	ngOnInit() {
 		console.log(this.items, 'items from products');
-		console.log(this.items?.[0], 'items from products');
+		this.allItems = this.items;
 	}
 
 	private insertTemplateWithCurrentIndex() {
@@ -55,12 +54,15 @@ export class PaginationDirective<T> implements OnInit {
 			},
 			allIndexes: items.map((_, index) => index),
 			selectIndex: (index: number) => {
-				this.currentActivePage(index);
+				this.activeSelectedIndex(index);
 			},
 		};
 	}
 
-	currentActivePage(index: number) {}
+	private activeSelectedIndex(index: number) {
+		// this.emitSelectedIndex(index)
+		console.log(index, 'index from template');
+	}
 
 	prev() {
 		const prevIndex = this.currentIndex - 1;

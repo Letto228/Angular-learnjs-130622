@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { productsMock } from '../../shared/products/products.mock';
 import { IProduct } from '../../shared/products/product.interface';
+import { Subject } from 'rxjs';
 
 @Component({
 	selector: 'app-products',
@@ -11,8 +12,7 @@ import { IProduct } from '../../shared/products/product.interface';
 export class ProductsComponent implements OnInit {
 	products: IProduct[] | undefined = undefined;
 
-	// isHovered = true;
-
+	items = [2, 34, 5, 6, 7, 3, 3, 5, 4];
 	constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
 	ngOnInit() {
@@ -25,6 +25,7 @@ export class ProductsComponent implements OnInit {
 		//   console.log(' ')
 		// }, 3000)
 
+		console.log(this.items.slice(2, 4), 'slice');
 		setTimeout(() => {
 			this.products = productsMock.map((item) => ({ ...item }));
 			this.changeDetectorRef.markForCheck();

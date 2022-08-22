@@ -1,13 +1,14 @@
 <!-- <button [appNgClass]="{hover: isHovered}" [ngStyle]="{color: '#fff'}">Button</button> -->
 <div *ngIf="products; else spinner" class="container">
   <ng-container
-    *appPagination="
-    let content of products
+    *appPagination="let content of products;
+    elementSize: 2;
     let prev = prev;
     let next = next;
     let activeIndex = index;
     let allIndexes = allIndexes;
-    let selectIndex = activeIndex">
+    let selectIndex = selectIndex"
+  >
     <!--<ng-template [ngIf]="products" [ngIfElse]="spinner">-->
 
       <!--    <ng-template ngFor let-product let-index="index" [ngForOf]="products" [ngForTrackBy]="trackBy">-->
@@ -16,7 +17,9 @@
       <!--    *ngFor="products" [ngForTrackBy]="trackBy">-->
 
       <app-product-card *ngFor="let product of content trackBy: trackBy; let index = index"
+
         class="product" [product]="product">
+        {{content}}
         {{product}}
       </app-product-card>
 
@@ -39,7 +42,7 @@
         mat-icon-button
         *ngFor="let index of allIndexes"
         class="pagination__button--active"
-        (click)="selectIndex()">
+        (click)="selectIndex(index)">
         {{index}}
       </button>
 
