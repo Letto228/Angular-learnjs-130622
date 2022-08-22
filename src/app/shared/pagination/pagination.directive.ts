@@ -30,7 +30,6 @@ export class PaginationDirective<T> implements OnInit {
 	) {}
 
 	ngOnInit() {
-		console.log(this.items, 'items from products');
 		this.allItems = this.items;
 	}
 
