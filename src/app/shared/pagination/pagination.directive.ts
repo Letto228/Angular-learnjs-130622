@@ -1,28 +1,27 @@
-import { Directive, EventEmitter, Input, OnInit, Output, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+	Directive,
+	EventEmitter,
+	Input,
+	OnChanges,
+	OnInit,
+	Output,
+	SimpleChanges,
+	TemplateRef,
+	ViewContainerRef,
+} from '@angular/core';
 import { IPaginationDirective } from './interfaces/pagination-directive.interface';
 
 @Directive({
 	selector: '[appPagination]',
 })
-export class PaginationDirective<T> implements OnInit {
-	@Input() set appPaginationOf(items: T[] | undefined) {
-		// если у нас длина элемента боль нуля, то есть если нам пришел маассив с новыми элементами то мы должы очистить предыдуший
-		if (!(items && items.length)) {
-			this.viewContainerRef.clear();
-		}
-
-		this.items = items;
-		this.currentIndex = 0;
-
-		this.insertTemplateWithCurrentIndex();
-	}
-
+export class PaginationDirective<T> implements OnInit, OnChanges {
+	@Input() appPaginationOf: T[] | undefined;
 	@Input('appPaginationElementSize') elementSize = 1;
 	@Output() emitSelectedIndex = new EventEmitter<() => void>();
 
-	private items: T[] | undefined = undefined;
+	private items: T[] | Array<T[]> | undefined = undefined;
 	private currentIndex: number = 0;
-	private allItems: T[] | undefined = undefined;
+	// private allItems: T[] | undefined = undefined;
 
 	constructor(
 		private templateRef: TemplateRef<IPaginationDirective<T>>,
@@ -30,7 +29,37 @@ export class PaginationDirective<T> implements OnInit {
 	) {}
 
 	ngOnInit() {
-		this.allItems = this.items;
+		console.log(this.appPaginationOf, 'appPaginationOf');
+	}
+
+	ngOnChanges({ appPaginationOf, appPaginationElementSize }: SimpleChanges) {
+		if (appPaginationOf || appPaginationElementSize) {
+			if (!(this.appPaginationOf && this.appPaginationOf.length)) {
+				this.viewContainerRef.clear();
+			}
+		}
+
+		this.items = this.elementSize > 1 ? this.getGroupedItemsListByElementsSize() : this.appPaginationOf;
+		this.currentIndex = 0;
+
+		this.insertTemplateWithCurrentIndex();
+	}
+
+	private getGroupedItemsListByElementsSize() {
+		return this.appPaginationOf?.reduce(
+			(acc: Array<T[]>, item: T): Array<T[]> => {
+				const lastGroupIndex = acc.length - 1;
+				const lastGroupLength = acc[lastGroupIndex].length;
+
+				if (lastGroupLength === this.elementSize) {
+					return [...acc, [item]];
+				}
+
+				acc[lastGroupIndex].push(item);
+				return [...acc];
+			},
+			[[]]
+		);
 	}
 
 	private insertTemplateWithCurrentIndex() {
